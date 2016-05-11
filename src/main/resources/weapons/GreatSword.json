@@ -1,0 +1,12 @@
+{
+  "name": "great sword",
+  "type": "melee",
+  "dmg": {
+    "base": 12,
+    "die": {
+      "size": "d8",
+      "number": 3
+    }
+  },
+  "baseHit": 5
+}

@@ -1,0 +1,22 @@
+{
+"profile": {
+  "race": "human",
+  "name": "Helga",
+  "baseDmg": 5
+  },
+"dialogue": {
+  "type": "simple",
+  "unfamiliar": "Aww, yet another \"soon to be\" hero.",
+  "familiar": "I best be getting to cleaning"
+  },
+"weapon": {
+  "type": "fist",
+  "decorators": [],
+  "predecorators": ["swift"]
+  },
+"armor": {
+  "type": "cloth",
+  "decorators": [],
+  "predecorators": ["tight"]
+  }
+}

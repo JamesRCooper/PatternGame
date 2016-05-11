@@ -1,0 +1,22 @@
+{
+"profile": {
+  "race": "human",
+  "name": "Gandorian",
+  "baseDmg": 10
+  },
+"dialogue": {
+  "type": "simple",
+  "unfamiliar": "I look forward to hearing of your accalades",
+  "familiar": "Welcome hero. Are you off on an adventure?"
+  },
+"weapon": {
+  "type": "great sword",
+  "decorators": ["of the beast"],
+  "predecorators": []
+  },
+"armor": {
+  "type": "chain mail",
+  "decorators": [],
+  "predecorators": ["shimmering"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "long sword",
+  "type": "melee",
+  "dmg": {
+    "base": 1,
+    "die": {
+      "size": "d0",
+      "number": 0
+    }
+  },
+  "baseHit": 3
+}

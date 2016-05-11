@@ -8,19 +8,17 @@ import java.util.function.Function;
 
 public class LoadedWeapon extends Weapon {
 
-    private String weaponName;
-
     private Function<Integer, Integer> hitCalculator;
     private Function<Integer, Integer> dmgCalculator;
 
     public LoadedWeapon(
+            final String identifier,
             final String weaponName,
             final Function<Integer, Integer> hitCalculator,
             final Function<Integer, Integer> dmgCalculator,
             final Integer baseHit,
             final Integer baseDmg) {
-        super(baseHit, baseDmg);
-        this.weaponName = weaponName;
+        super(identifier, weaponName, baseHit, baseDmg);
         this.hitCalculator = hitCalculator;
         this.dmgCalculator = dmgCalculator;
     }
@@ -33,24 +31,5 @@ public class LoadedWeapon extends Weapon {
     @Override
     public Integer dmg() {
         return dmgCalculator.apply(baseDmg);
-    }
-
-    @Override
-    public String getName() {
-        return weaponName;
-    }
-
-    @Override
-    public String getIdentifier() {
-        return weaponName;
-    }
-
-    public Weapon clone() {
-        return new LoadedWeapon(
-                weaponName,
-                hitCalculator,
-                dmgCalculator,
-                baseHit,
-                baseDmg);
     }
 }

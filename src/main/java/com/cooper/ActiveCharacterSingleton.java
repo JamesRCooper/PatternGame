@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.cooper.factory.CharacterLoader;
+import com.cooper.loader.CharacterLoader;
 import com.cooper.models.character.Character;
 
 public class ActiveCharacterSingleton {

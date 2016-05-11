@@ -1,12 +1,12 @@
 package com.cooper.models.character;
 
-import com.cooper.models.Carryable;
+import com.cooper.models.Model;
 import com.cooper.models.armor.Armor;
-import com.cooper.models.armor.ClothArmor;
+import com.cooper.models.armor.concrete.ClothArmor;
 import com.cooper.models.dialogue.Dialogue;
 import com.cooper.models.weapons.Weapon;
 
-public abstract class Character implements Carryable {
+public abstract class Character implements Model {
 
     protected String name;
     protected Integer baseDmg;

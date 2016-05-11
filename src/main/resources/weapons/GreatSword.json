@@ -1,5 +1,6 @@
 {
   "name": "great sword",
+  "weaponClass": "GreatSwordWeapon",
   "type": "melee",
   "dmg": {
     "base": 12,

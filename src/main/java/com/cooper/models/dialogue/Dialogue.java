@@ -4,7 +4,9 @@
  */
 package com.cooper.models.dialogue;
 
-public abstract class Dialogue {
+import com.cooper.models.Model;
+
+public abstract class Dialogue implements Model {
 
     public abstract String getFamiliarityBasedResponse(Boolean isFamiliar);
 }

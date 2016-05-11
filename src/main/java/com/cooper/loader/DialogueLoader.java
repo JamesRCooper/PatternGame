@@ -2,7 +2,7 @@
  * Copyright (C) 2016 by Amobee Inc.
  * All Rights Reserved.
  */
-package com.cooper.models;
+package com.cooper.loader;
 
-public interface Carryable extends Model {
+public class DialogueLoader {
 }

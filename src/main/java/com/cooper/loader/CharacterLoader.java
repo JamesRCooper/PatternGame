@@ -2,7 +2,7 @@
  * Copyright (C) 2016 by Amobee Inc.
  * All Rights Reserved.
  */
-package com.cooper.factory;
+package com.cooper.loader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.cooper.factory.FactoryBuilder;
 import com.cooper.loader.Loader;
 import com.cooper.models.armor.Armor;
 import com.cooper.models.character.Character;

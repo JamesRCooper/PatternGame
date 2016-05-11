@@ -16,9 +16,10 @@ import java.util.function.Function;
 
 import com.cooper.factory.AbstractCarryableFactory;
 import com.cooper.models.Carryable;
+import com.cooper.models.Model;
 import com.cooper.utils.Dice;
 
-public abstract class Loader<T extends Carryable> {
+public abstract class Loader<T extends Model> {
 
     protected Map<String, T> items;
     protected String rootDirectory;

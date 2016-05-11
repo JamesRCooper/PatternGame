@@ -7,10 +7,10 @@ package com.cooper.factory;
 import org.json.JSONObject;
 
 import com.cooper.models.armor.Armor;
-import com.cooper.models.armor.ChainMailArmor;
-import com.cooper.models.armor.ClothArmor;
-import com.cooper.models.armor.decorators.ShimmeringPreDecorator;
-import com.cooper.models.armor.decorators.TightPreDecor;
+import com.cooper.models.armor.concrete.ChainMailArmor;
+import com.cooper.models.armor.concrete.ClothArmor;
+import com.cooper.models.armor.concrete.ShimmeringArmDecor;
+import com.cooper.models.armor.concrete.TightArmDecor;
 
 public class ArmorBuilder extends AbstractCarryableFactory<Armor> {
 
@@ -49,10 +49,10 @@ public class ArmorBuilder extends AbstractCarryableFactory<Armor> {
 
         switch (decorator) {
         case ("shimmering"):
-            item = new ShimmeringPreDecorator(item);
+            item = new ShimmeringArmDecor(item);
             break;
         case ("tight"):
-            item = new TightPreDecor(item);
+            item = new TightArmDecor(item);
             break;
         default:
             throw new RuntimeException("No armor pre decorator of type: " + decorator);

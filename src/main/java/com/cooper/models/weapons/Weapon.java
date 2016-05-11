@@ -4,27 +4,36 @@
  */
 package com.cooper.models.weapons;
 
+import static com.cooper.utils.Dice.xd20_plusy;
+
 import com.cooper.models.Carryable;
-import com.cooper.models.character.Character;
 
 public abstract class Weapon implements Carryable {
 
-    protected Character wielder;
+    private String identifier;
 
+    protected String name;
     protected Integer baseHit;
     protected Integer baseDmg;
 
-    public Weapon(Integer baseHit, Integer baseDmg) {
+    public Weapon(String identifier, String name, Integer baseHit, Integer baseDmg) {
+        this.identifier = identifier;
+        this.name = name;
         this.baseHit = baseHit;
         this.baseDmg = baseDmg;
     }
 
-    public abstract Integer hit();
-    public abstract Integer dmg();
-
-    public void setWielder(Character wielder) {
-        this.wielder = wielder;
+    public Integer hit() {
+        return xd20_plusy(1, baseHit);
     }
 
-    public abstract String getName();
+    public abstract Integer dmg();
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIdentifier() {
+        return  identifier;
+    }
 }

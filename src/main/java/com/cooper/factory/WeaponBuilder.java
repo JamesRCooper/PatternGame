@@ -7,8 +7,8 @@ package com.cooper.factory;
 import org.json.JSONObject;
 
 import com.cooper.models.weapons.Weapon;
-import com.cooper.models.weapons.decorators.OfTheBeastWDecor;
-import com.cooper.models.weapons.decorators.SwiftWPreDecor;
+import com.cooper.models.weapons.concrete.OfTheBeastWpnDecor;
+import com.cooper.models.weapons.concrete.SwiftWpnDecor;
 
 public class WeaponBuilder extends AbstractCarryableFactory<Weapon> {
 
@@ -38,7 +38,7 @@ public class WeaponBuilder extends AbstractCarryableFactory<Weapon> {
 
         switch(decorator) {
         case ("of the beast"):
-            item = new OfTheBeastWDecor(item);
+            item = new OfTheBeastWpnDecor(item);
             break;
         default:
             throw new RuntimeException("No weapon post decorator found of type: " + decorator);
@@ -50,7 +50,7 @@ public class WeaponBuilder extends AbstractCarryableFactory<Weapon> {
 
         switch(decorator) {
         case ("swift"):
-            item = new SwiftWPreDecor(item);
+            item = new SwiftWpnDecor(item);
             break;
         default:
             throw new RuntimeException("No weapon pre decorator found of type: " + decorator);

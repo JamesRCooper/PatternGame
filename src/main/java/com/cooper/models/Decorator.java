@@ -4,5 +4,6 @@
  */
 package com.cooper.models;
 
-public interface Carryable extends Model {
+public interface Decorator<T extends Carryable> {
+    T wrapItemWithNewInstance(T item);
 }

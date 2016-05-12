@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 
 import org.json.JSONObject;
 
+import com.cooper.builder.ArmorBuilder;
+import com.cooper.builder.WeaponBuilder;
 import com.cooper.models.armor.Armor;
 import com.cooper.models.dialogue.Dialogue;
 import com.cooper.models.dialogue.SimpleDialogue;

@@ -16,11 +16,11 @@ import java.util.function.Function;
 
 import org.json.JSONObject;
 
-import com.cooper.models.Carryable;
+import com.cooper.models.Model;
 import com.cooper.utils.Dice;
 import com.cooper.utils.JSONHandler;
 
-public abstract class Loader<T extends Carryable> {
+public abstract class Loader<T extends Model> {
 
     protected JSONHandler jsonHandler;
 

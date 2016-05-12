@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.cooper.builder.ArmorBuilder;
+import com.cooper.builder.WeaponBuilder;
 import com.cooper.models.armor.Armor;
 import com.cooper.models.weapons.Weapon;
 import com.cooper.utils.JSONHandler;

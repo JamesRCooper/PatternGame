@@ -1,0 +1,20 @@
+{
+  "type": "weapon_decorator",
+  "identifier": "SharpWeaponDecorator",
+  "name": "sharp",
+  "placement": "PREFIX",
+  "dmg": {
+    "base": 2,
+    "die": {
+      "size": "d4",
+      "number": 1
+    }
+  },
+  "hit": {
+    "base": 0,
+    "die": {
+      "size": "d0",
+      "number": 0
+    }
+  }
+}

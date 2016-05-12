@@ -1,0 +1,6 @@
+{
+  "type": "armor",
+  "identifier": "PlateMailArmor",
+  "name": "plate mail",
+  "baseAC": 12
+}

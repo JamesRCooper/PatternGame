@@ -18,7 +18,7 @@ public class WeaponFactory {
     }
 
     public Weapon getWeaponByName(final String weaponName) {
-        //TODO: expand to make use of hard coded weapons
+        //TODO: expand to make use of hard coded weapon
         if (weapons.containsKey(weaponName)) {
             return weapons.get(weaponName).clone();
         }

@@ -14,18 +14,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.cooper.factory.AbstractCarryableFactory;
-import com.cooper.models.Carryable;
-import com.cooper.models.Model;
-import com.cooper.utils.Dice;
+import org.json.JSONObject;
 
-public abstract class Loader<T extends Model> {
+import com.cooper.models.Carryable;
+import com.cooper.utils.Dice;
+import com.cooper.utils.JSONHandler;
+
+public abstract class Loader<T extends Carryable> {
+
+    protected JSONHandler jsonHandler;
 
     protected Map<String, T> items;
     protected String rootDirectory;
 
-    public Loader(String rootDirectory) {
+    public Loader(String rootDirectory, JSONHandler jsonHandler) {
         this.rootDirectory = rootDirectory;
+        this.jsonHandler = jsonHandler;
         items = new HashMap<>();
         populateItems();
     }
@@ -64,6 +68,14 @@ public abstract class Loader<T extends Model> {
     }
 
     protected abstract T createItemFromJsonSheet(final String itemSheet);
+
+    protected Function<Integer, Integer> buildDie(final JSONObject dieObject) {
+
+        String size = jsonHandler.handle(dieObject::getString, "size");
+        Integer number = jsonHandler.handle(dieObject::getInt, "number");
+
+        return getDiceRoller(size, number);
+    }
 
     protected Function<Integer, Integer> getDiceRoller(String diceType, Integer diceNumber) {
 

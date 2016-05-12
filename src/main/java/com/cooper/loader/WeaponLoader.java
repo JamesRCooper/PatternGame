@@ -4,46 +4,35 @@
  */
 package com.cooper.loader;
 
-import java.util.function.Function;
-
 import org.json.JSONObject;
 
 import com.cooper.models.weapons.LoadedWeapon;
+import com.cooper.models.weapons.Weapon;
 import com.cooper.utils.JSONHandler;
 
-public class WeaponLoader extends Loader<LoadedWeapon> {
-
-    private static String rootDirectory = "src/main/resources/weapons";
-    private final JSONHandler jsonHandler = new JSONHandler("Loading weapon");
+public class WeaponLoader extends Loader<Weapon> {
 
     public WeaponLoader() {
-        super(rootDirectory);
+        super("src/main/resources/weapon", new JSONHandler("Loading weapon"));
     }
 
     @Override
-    protected LoadedWeapon createItemFromJsonSheet(String itemSheet) {
+    protected Weapon createItemFromJsonSheet(String weaponSheet) {
 
-        JSONObject itemFields = jsonHandler.handle(JSONObject::new, itemSheet);
+        JSONObject weaponFields = jsonHandler.handle(JSONObject::new, weaponSheet);
 
-        String name = jsonHandler.handle(itemFields::getString, "name");
-        String type = jsonHandler.handle(itemFields::getString, "type");
+        String identifier = jsonHandler.handle(weaponFields::getString, "identifier");
+        String name = jsonHandler.handle(weaponFields::getString, "name");
+        String type = jsonHandler.handle(weaponFields::getString, "type");
 
-        Integer baseHit = jsonHandler.handle(itemFields::getInt, "baseHit");
-        Function<Integer, Integer> hitRoll = getDiceRoller("d20", 1);
-
-        JSONObject dmgFields = jsonHandler.handle(itemFields::getJSONObject, "dmg");
+        JSONObject dmgFields = jsonHandler.handle(weaponFields::getJSONObject, "dmg");
+        JSONObject hitFields = jsonHandler.handle(weaponFields::getJSONObject, "hit");
         Integer baseDmg = jsonHandler.handle(dmgFields::getInt, "base");
+        Integer baseHit = jsonHandler.handle(hitFields::getInt, "base");
 
-        JSONObject diceFields = jsonHandler.handle(dmgFields::getJSONObject, "die");
-        String diceType = jsonHandler.handle(diceFields::getString, "size");
-        Integer diceNumber = jsonHandler.handle(diceFields::getInt, "number");
-        Function<Integer, Integer> dmgRoll = getDiceRoller(diceType, diceNumber);
+        JSONObject dmgDie = jsonHandler.handle(dmgFields::getJSONObject, "die");
+        JSONObject hitDie = jsonHandler.handle(hitFields::getJSONObject, "die");
 
-        return new LoadedWeapon(
-                name,
-                hitRoll,
-                dmgRoll,
-                baseHit,
-                baseDmg);
+        return new LoadedWeapon(identifier, name, buildDie(hitDie), buildDie(dmgDie), baseHit, baseDmg);
     }
 }

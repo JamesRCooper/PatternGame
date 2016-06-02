@@ -19,4 +19,9 @@ public class ArmorDecoratorController extends BaseEntityControllerTemplate<Armor
 
         super(armorDecoratorRepository);
     }
+
+    @Override
+    protected ArmorDecorator getNewEntity() {
+        return new ArmorDecorator();
+    }
 }

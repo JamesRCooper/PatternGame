@@ -19,4 +19,9 @@ public class WeaponDecoratorController extends BaseEntityControllerTemplate<Weap
 
         super(entityRepository);
     }
+
+    @Override
+    protected WeaponDecorator getNewEntity() {
+        return new WeaponDecorator();
+    }
 }

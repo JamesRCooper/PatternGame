@@ -19,4 +19,9 @@ public class ArmorController extends BaseEntityControllerTemplate<ArmorBase> {
 
         super(armorRepository);
     }
+
+    @Override
+    protected ArmorBase getNewEntity() {
+        return new ArmorBase();
+    }
 }

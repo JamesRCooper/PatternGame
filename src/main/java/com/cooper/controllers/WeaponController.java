@@ -19,4 +19,9 @@ public class WeaponController extends BaseEntityControllerTemplate<WeaponBase> {
 
         super(entityRepository);
     }
+
+    @Override
+    protected WeaponBase getNewEntity() {
+        return new WeaponBase();
+    }
 }

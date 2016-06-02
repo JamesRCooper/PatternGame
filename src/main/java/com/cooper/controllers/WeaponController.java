@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooper.data.WeaponRepository;
-import com.cooper.entities.WeaponBase;
+import com.cooper.entities.WeaponEntity;
 
 @RestController
 @RequestMapping("/weapon")
-public class WeaponController extends BaseEntityControllerTemplate<WeaponBase> {
+public class WeaponController extends BaseEntityControllerTemplate<WeaponEntity> {
 
     public WeaponController(
              WeaponRepository entityRepository) {
@@ -21,7 +21,7 @@ public class WeaponController extends BaseEntityControllerTemplate<WeaponBase> {
     }
 
     @Override
-    protected WeaponBase getNewEntity() {
-        return new WeaponBase();
+    protected WeaponEntity getNewEntity() {
+        return new WeaponEntity();
     }
 }

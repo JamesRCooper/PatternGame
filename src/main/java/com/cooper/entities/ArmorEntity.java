@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 
 import com.cooper.enums.CarryableType;
 
-public class ArmorBase implements CarryableEntity {
+public class ArmorEntity implements CarryableEntity {
 
     @Id
     private String identifier;
@@ -16,7 +16,7 @@ public class ArmorBase implements CarryableEntity {
     private String name;
     private Integer baseAC;
 
-    public ArmorBase(
+    public ArmorEntity(
             String identifier,
             CarryableType type,
             String name,
@@ -28,7 +28,7 @@ public class ArmorBase implements CarryableEntity {
         this.baseAC = baseAC;
     }
 
-    public ArmorBase() {
+    public ArmorEntity() {
     }
 
     public CarryableType getType() {

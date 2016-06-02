@@ -1,22 +1,21 @@
 {
-"profile": {
-  "race": "human",
-  "name": "Gandorian",
-  "baseDmg": 10
+  "name": "Gandalor",
+  "raceType": "ELF",
+  "classType": "WARRIOR",
+  "strength": 18,
+  "constitution": 16,
+  "dexterity": 14,
+  "intelligence": 10,
+  "charisma": 12,
+  "wisdom": 10,
+  "mainHand": {
+    "baseIdentifier": "GREAT_SWORD",
+    "decorators": ["SHARP"]
   },
-"dialogue": {
-  "type": "simple",
-  "unfamiliar": "I look forward to hearing of your accalades",
-  "familiar": "Welcome hero. Are you off on an adventure?"
+  "offHand": null,
+  "armor": {
+    "baseIdentifier": "CHAIN_MAIL",
+    "decorators": ["SHIMMERING"]
   },
-"weapon": {
-  "type": "great sword",
-  "decorators": ["of the beast"],
-  "predecorators": []
-  },
-"armor": {
-  "type": "chain mail",
-  "decorators": [],
-  "predecorators": ["shimmering"]
-  }
+  "bag": []
 }

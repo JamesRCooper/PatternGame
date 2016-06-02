@@ -8,13 +8,13 @@ import com.cooper.enums.DieType;
 
 public class Dice {
 
-    private Integer baseValue;
-    private Integer numberOfDice;
+    private Integer base;
+    private Integer number;
     private DieType size;
 
-    public Dice(Integer baseValue, Integer numberOfDice, DieType size) {
-        this.baseValue = baseValue;
-        this.numberOfDice = numberOfDice;
+    public Dice(Integer base, Integer number, DieType size) {
+        this.base = base;
+        this.number = number;
         this.size = size;
     }
 
@@ -22,23 +22,23 @@ public class Dice {
     }
 
     public Integer roll() {
-        return size.roll(numberOfDice, baseValue);
+        return size.roll(number, base);
     }
 
-    public Integer getBaseValue() {
-        return baseValue;
+    public Integer getBase() {
+        return base;
     }
 
-    public void setBaseValue(Integer baseValue) {
-        this.baseValue = baseValue;
+    public void setBase(Integer base) {
+        this.base = base;
     }
 
-    public Integer getNumberOfDice() {
-        return numberOfDice;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setNumberOfDice(Integer numberOfDice) {
-        this.numberOfDice = numberOfDice;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public DieType getSize() {

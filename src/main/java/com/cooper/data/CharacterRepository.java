@@ -6,7 +6,7 @@ package com.cooper.data;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.cooper.entities.WeaponEntity;
+import com.cooper.entities.CharacterEntity;
 
-public interface WeaponRepository extends MongoRepository<WeaponEntity, String> {
+public interface CharacterRepository extends MongoRepository<CharacterEntity, String> {
 }

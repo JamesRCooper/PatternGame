@@ -1,0 +1,15 @@
+{
+  "identifier": "GREAT_SWORD",
+  "type": "WEAPON",
+  "name": "great sword",
+  "dmg": {
+    "base": 12,
+    "size": "D8",
+    "number": 3
+  },
+  "hit": {
+    "base": 5,
+    "size": "D20",
+    "number": 1
+  }
+}

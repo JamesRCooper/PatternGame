@@ -1,0 +1,15 @@
+{
+  "identifier": "DAGGER",
+  "type": "WEAPON",
+  "name": "dagger",
+  "dmg": {
+    "base": 4,
+    "size": "D4",
+    "number": 2
+  },
+  "hit": {
+    "base": 8,
+    "size": "D20",
+    "number": 1
+  }
+}

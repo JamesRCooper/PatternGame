@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooper.data.ArmorRepository;
-import com.cooper.entities.ArmorBase;
+import com.cooper.entities.ArmorEntity;
 
 @RestController
 @RequestMapping("/armor")
-public class ArmorController extends BaseEntityControllerTemplate<ArmorBase> {
+public class ArmorController extends BaseEntityControllerTemplate<ArmorEntity> {
 
     public ArmorController(
             ArmorRepository armorRepository) {
@@ -21,7 +21,7 @@ public class ArmorController extends BaseEntityControllerTemplate<ArmorBase> {
     }
 
     @Override
-    protected ArmorBase getNewEntity() {
-        return new ArmorBase();
+    protected ArmorEntity getNewEntity() {
+        return new ArmorEntity();
     }
 }

@@ -6,7 +6,7 @@ package com.cooper.data;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.cooper.entities.ArmorDecorator;
+import com.cooper.entities.ArmorDecoratorEntity;
 
-public interface ArmorDecoratorRepository extends MongoRepository<ArmorDecorator, String> {
+public interface ArmorDecoratorRepository extends MongoRepository<ArmorDecoratorEntity, String> {
 }

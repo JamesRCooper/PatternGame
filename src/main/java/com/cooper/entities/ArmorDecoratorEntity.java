@@ -6,35 +6,41 @@ package com.cooper.entities;
 
 import org.springframework.data.annotation.Id;
 
-import com.cooper.entities.sub.Dice;
 import com.cooper.enums.CarryableType;
 import com.cooper.enums.DecoratorPlacement;
 
-public class WeaponDecorator implements CarryableEntity {
+public class ArmorDecoratorEntity implements CarryableEntity {
 
     @Id
     private String identifier;
     private CarryableType type;
     private String name;
     private DecoratorPlacement placement;
-    private Dice dmg;
-    private Dice hit;
+    private Integer baseAC;
 
-    public WeaponDecorator(
+    public ArmorDecoratorEntity(
             String identifier,
             CarryableType type,
             String name,
             DecoratorPlacement placement,
-            Dice dmg, Dice hit) {
+            Integer baseAC) {
+
         this.identifier = identifier;
         this.type = type;
         this.name = name;
         this.placement = placement;
-        this.dmg = dmg;
-        this.hit = hit;
+        this.baseAC = baseAC;
     }
 
-    public WeaponDecorator() {
+    public ArmorDecoratorEntity() {
+    }
+
+    public CarryableType getType() {
+        return type;
+    }
+
+    public void setType(CarryableType type) {
+        this.type = type;
     }
 
     public String getIdentifier() {
@@ -61,19 +67,11 @@ public class WeaponDecorator implements CarryableEntity {
         this.placement = placement;
     }
 
-    public Dice getDmg() {
-        return dmg;
+    public Integer getBaseAC() {
+        return baseAC;
     }
 
-    public void setDmg(Dice dmg) {
-        this.dmg = dmg;
-    }
-
-    public Dice getHit() {
-        return hit;
-    }
-
-    public void setHit(Dice hit) {
-        this.hit = hit;
+    public void setBaseAC(Integer baseAC) {
+        this.baseAC = baseAC;
     }
 }

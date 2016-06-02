@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 import com.cooper.entities.sub.Dice;
 import com.cooper.enums.CarryableType;
 
-public class WeaponBase implements CarryableEntity {
+public class WeaponEntity implements CarryableEntity {
 
     @Id
     private String identifier;
@@ -18,7 +18,7 @@ public class WeaponBase implements CarryableEntity {
     private Dice dmg;
     private Dice hit;
 
-    public WeaponBase(
+    public WeaponEntity(
             String identifier,
             CarryableType type,
             String name,
@@ -32,7 +32,7 @@ public class WeaponBase implements CarryableEntity {
         this.hit = hit;
     }
 
-    public WeaponBase() {
+    public WeaponEntity() {
     }
 
     public CarryableType getType() {

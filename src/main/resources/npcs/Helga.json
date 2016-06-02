@@ -1,22 +1,21 @@
 {
-"profile": {
-  "race": "human",
   "name": "Helga",
-  "baseDmg": 5
+  "raceType": "HALFLING",
+  "classType": "ROGUE",
+  "strength": 10,
+  "constitution": 10,
+  "dexterity": 14,
+  "intelligence": 16,
+  "charisma": 18,
+  "wisdom": 16,
+  "mainHand": {
+    "baseIdentifier": "DAGGER",
+    "decorators": []
   },
-"dialogue": {
-  "type": "simple",
-  "unfamiliar": "Aww, yet another \"soon to be\" hero.",
-  "familiar": "I best be getting to cleaning"
+  "offHand": null,
+  "armor": {
+    "baseIdentifier": "LEATHER",
+    "decorators": []
   },
-"weapon": {
-  "type": "fist",
-  "decorators": [],
-  "predecorators": ["swift"]
-  },
-"armor": {
-  "type": "cloth",
-  "decorators": [],
-  "predecorators": ["tight"]
-  }
+  "bag": []
 }

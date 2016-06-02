@@ -12,7 +12,8 @@ public enum DieType {
     D8("d8", DiceUtil::xd8_plusy),
     D6("d6", DiceUtil::xd6_plusy),
     D4("d4", DiceUtil::xd4_plusy),
-    D2("d2", DiceUtil::xd2_plusy);
+    D2("d2", DiceUtil::xd2_plusy),
+    D0("d0", DiceUtil::xd0_plusy);
 
     private String value;
     private BiFunction<Integer, Integer, Integer> rollNWithModifier;

@@ -10,6 +10,10 @@ public class DiceUtil {
 
     private static Random random = new Random();
 
+    public static Integer xd0_plusy(final Integer numberOfDice, final Integer offset) {
+        return offset;
+    }
+
     public static Integer xd2_plusy(final Integer numberOfDie, final Integer offset) {
         Integer roll = random.ints(numberOfDie, 1, 3).sum();
         return roll + offset;

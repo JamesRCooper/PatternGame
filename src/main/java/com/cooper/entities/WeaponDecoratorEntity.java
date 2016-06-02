@@ -6,41 +6,35 @@ package com.cooper.entities;
 
 import org.springframework.data.annotation.Id;
 
+import com.cooper.entities.sub.Dice;
 import com.cooper.enums.CarryableType;
 import com.cooper.enums.DecoratorPlacement;
 
-public class ArmorDecorator implements CarryableEntity {
+public class WeaponDecoratorEntity implements CarryableEntity {
 
     @Id
     private String identifier;
     private CarryableType type;
     private String name;
     private DecoratorPlacement placement;
-    private Integer baseAC;
+    private Dice dmg;
+    private Dice hit;
 
-    public ArmorDecorator(
+    public WeaponDecoratorEntity(
             String identifier,
             CarryableType type,
             String name,
             DecoratorPlacement placement,
-            Integer baseAC) {
-
+            Dice dmg, Dice hit) {
         this.identifier = identifier;
         this.type = type;
         this.name = name;
         this.placement = placement;
-        this.baseAC = baseAC;
+        this.dmg = dmg;
+        this.hit = hit;
     }
 
-    public ArmorDecorator() {
-    }
-
-    public CarryableType getType() {
-        return type;
-    }
-
-    public void setType(CarryableType type) {
-        this.type = type;
+    public WeaponDecoratorEntity() {
     }
 
     public String getIdentifier() {
@@ -49,6 +43,14 @@ public class ArmorDecorator implements CarryableEntity {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public CarryableType getType() {
+        return type;
+    }
+
+    public void setType(CarryableType type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -67,11 +69,19 @@ public class ArmorDecorator implements CarryableEntity {
         this.placement = placement;
     }
 
-    public Integer getBaseAC() {
-        return baseAC;
+    public Dice getDmg() {
+        return dmg;
     }
 
-    public void setBaseAC(Integer baseAC) {
-        this.baseAC = baseAC;
+    public void setDmg(Dice dmg) {
+        this.dmg = dmg;
+    }
+
+    public Dice getHit() {
+        return hit;
+    }
+
+    public void setHit(Dice hit) {
+        this.hit = hit;
     }
 }

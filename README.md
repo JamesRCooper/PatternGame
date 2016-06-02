@@ -20,3 +20,11 @@ Abstract Factory and the Factory Pattern - "com/amobee/factory/AbstractCarryable
  Observer Pattern - I may use this with active NPCs in order to have them react to global events
  
  Command Pattern - This may be used for special skills and abilities the characters have.
+ 
+ Facade Pattern - This may be useful when dual wielding weapons. A facade can be used to make multiple weapons act like one.
+ 
+ Adapter Pattern - Right now, no external libraries are being called (that we don't build upon directly). However, The adapter may be useful in creating familiars from characters.
+ 
+ - My own patterns (probably not as good)
+ 
+ Frame (or Barebone) Pattern - This pattern is an intermediate class between an interface/abstract, and a final used class. It's a class that exposes setters for all fields on a class, even fields that exposure is not wanted. The runtime constructed classes take .

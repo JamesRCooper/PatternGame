@@ -1,6 +1,6 @@
 {
-  "type": "armor_decorator",
-  "identifier": "ShimmeringArmorDecorator",
+  "identifier": "SHIMMERING",
+  "type": "ARMOR_DECORATOR",
   "name": "shimmering",
   "placement": "PREFIX",
   "baseAC": 2

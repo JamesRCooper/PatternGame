@@ -5,101 +5,28 @@
 package com.cooper.loader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.nio.file.Files;
 
-import org.json.JSONObject;
+import com.cooper.entities.CarryableEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.cooper.models.Model;
-import com.cooper.utils.Dice;
-import com.cooper.utils.JSONHandler;
+public class Loader {
 
-public abstract class Loader<T extends Model> {
 
-    protected JSONHandler jsonHandler;
 
-    protected Map<String, T> items;
-    protected String rootDirectory;
+    public <Q extends CarryableEntity> Q load(
+            String filePath,
+            Class<Q> entityClass) {
 
-    public Loader(String rootDirectory, JSONHandler jsonHandler) {
-        this.rootDirectory = rootDirectory;
-        this.jsonHandler = jsonHandler;
-        items = new HashMap<>();
-        populateItems();
-    }
-
-    private void populateItems() {
-
-        List<File> itemFiles = collectItemFiles();
-        itemFiles.forEach(this::loadItem);
-    }
-
-    private List<File> collectItemFiles() {
-        File directory = new File(rootDirectory);
-        File[] files = directory.listFiles();
-        if (files != null) {
-            return Arrays.asList(files);
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    private void loadItem(File file) {
-        String itemSheet = getJsonSheetFromFile(file);
-        T item = createItemFromJsonSheet(itemSheet);
-        items.put(item.getIdentifier(), item);
-    }
-
-    private String getJsonSheetFromFile(File file) {
-        try (FileInputStream stream = new FileInputStream(file)) {
-            byte[] bytes = new byte[(int) file.length()];
-            stream.read(bytes);
-            stream.close();
-            return new String(bytes, "UTF-8");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            File f = new File(filePath);
+            String jsonBody = new String(Files.readAllBytes(f.toPath()), "utf8");
+            return mapper.readValue(jsonBody, entityClass);
         } catch (IOException ioEx) {
-            throw new RuntimeException(ioEx);
+            throw new RuntimeException("Read was not successful", ioEx);
         }
     }
 
-    protected abstract T createItemFromJsonSheet(final String itemSheet);
-
-    protected Function<Integer, Integer> buildDie(final JSONObject dieObject) {
-
-        String size = jsonHandler.handle(dieObject::getString, "size");
-        Integer number = jsonHandler.handle(dieObject::getInt, "number");
-
-        return getDiceRoller(size, number);
-    }
-
-    protected Function<Integer, Integer> getDiceRoller(String diceType, Integer diceNumber) {
-
-        switch (diceType) {
-        case ("d2"):
-            return (augment) -> Dice.xd2_plusy(diceNumber, augment);
-        case ("d4"):
-            return (augment) -> Dice.xd4_plusy(diceNumber, augment);
-        case ("d6"):
-            return (augment) -> Dice.xd6_plusy(diceNumber, augment);
-        case ("d8"):
-            return (augment) -> Dice.xd8_plusy(diceNumber, augment);
-        case ("d10"):
-            return (augment) -> Dice.xd10_plusy(diceNumber, augment);
-        case ("d12"):
-            return (augment) -> Dice.xd12_plusy(diceNumber, augment);
-        case ("d20"):
-            return (augment) -> Dice.xd20_plusy(diceNumber, augment);
-        default:
-            return (augment) -> augment;
-        }
-    }
-
-    public Map<String, T> getItems() {
-        return items;
-    }
 }

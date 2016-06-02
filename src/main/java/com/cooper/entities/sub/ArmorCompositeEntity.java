@@ -6,7 +6,10 @@ package com.cooper.entities.sub;
 
 import java.util.List;
 
-public class ArmorCompositeEntity {
+import com.cooper.entities.ArmorEntity;
+
+//TODO: consolidate composite entities
+public class ArmorCompositeEntity implements CompositeEntity<ArmorEntity> {
 
     private String baseIdentifier;
     private List<String> decorators;

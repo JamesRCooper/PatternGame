@@ -67,5 +67,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-rest-webmvc:2.4.4.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-rest-core:2.4.4.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: com.github.fge:json-patch:1.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.mockito:mockito-core:1.10.19" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.objenesis:objenesis:2.1" level="project" />
   </component>
 </module>

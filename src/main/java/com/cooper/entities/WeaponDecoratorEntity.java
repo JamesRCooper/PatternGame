@@ -10,7 +10,7 @@ import com.cooper.entities.sub.Dice;
 import com.cooper.enums.CarryableType;
 import com.cooper.enums.DecoratorPlacement;
 
-public class WeaponDecoratorEntity implements CarryableEntity {
+public class WeaponDecoratorEntity implements CarryableDecoratorEntity<WeaponEntity> {
 
     @Id
     private String identifier;

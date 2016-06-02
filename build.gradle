@@ -32,6 +32,7 @@ dependencies {
     compile("org.codeartisans:org.json:20130213")
 
     testCompile("junit:junit")
+    testCompile("org.mockito:mockito-core:1.+")
 }
 
 task wrapper(type: Wrapper) {

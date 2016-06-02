@@ -6,7 +6,9 @@ package com.cooper.entities.sub;
 
 import java.util.List;
 
-public class WeaponCompositeEntity {
+import com.cooper.entities.WeaponEntity;
+
+public class WeaponCompositeEntity implements CompositeEntity<WeaponEntity> {
 
     private String baseIdentifier;
     private List<String> decorators;

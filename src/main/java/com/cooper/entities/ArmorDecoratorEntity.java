@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 import com.cooper.enums.CarryableType;
 import com.cooper.enums.DecoratorPlacement;
 
-public class ArmorDecoratorEntity implements CarryableEntity {
+public class ArmorDecoratorEntity implements CarryableDecoratorEntity<ArmorEntity> {
 
     @Id
     private String identifier;

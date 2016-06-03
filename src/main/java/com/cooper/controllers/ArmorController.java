@@ -11,7 +11,7 @@ import com.cooper.data.ArmorRepository;
 import com.cooper.entities.ArmorEntity;
 
 @RestController
-@RequestMapping("/armor")
+@RequestMapping("/entity/armor")
 public class ArmorController extends BaseEntityControllerTemplate<ArmorEntity> {
 
     public ArmorController(

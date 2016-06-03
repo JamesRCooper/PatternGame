@@ -11,7 +11,7 @@ import com.cooper.data.WeaponRepository;
 import com.cooper.entities.WeaponEntity;
 
 @RestController
-@RequestMapping("/weapon")
+@RequestMapping("/entity/weapon")
 public class WeaponController extends BaseEntityControllerTemplate<WeaponEntity> {
 
     public WeaponController(

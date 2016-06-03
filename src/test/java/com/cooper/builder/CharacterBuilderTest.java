@@ -14,7 +14,6 @@ import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.cooper.data.CharacterRepository;
 import com.cooper.entities.CharacterEntity;

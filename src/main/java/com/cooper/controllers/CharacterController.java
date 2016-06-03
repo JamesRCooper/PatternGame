@@ -18,7 +18,7 @@ import com.cooper.data.CharacterRepository;
 import com.cooper.entities.CharacterEntity;
 
 @RestController
-@RequestMapping("/character")
+@RequestMapping("/entity/character")
 public class CharacterController {
 
     private CharacterRepository characterRepository;

@@ -64,6 +64,30 @@ public class CharacterBase implements Character {
         return name;
     }
 
+    public String getMainHandName() {
+        return mainHand == null ? "nothing" : mainHand.getName();
+    }
+
+    public String getOffHandName() {
+        return offHand == null ? "nothing" : offHand.getName();
+    }
+
+    public String getArmorName() {
+        return armor == null ? "nothing" : armor.getName();
+    }
+
+    public String getMainHandIdentifer() {
+        return mainHand == null ? "nothing" : mainHand.getIdentifier();
+    }
+
+    public String getOffHandIdentifier() {
+        return offHand == null ? "nothing" : offHand.getIdentifier();
+    }
+
+    public String getArmorIdentifer() {
+        return armor == null ? "nothing" : armor.getIdentifier();
+    }
+    
     @Override
     public String getIdentifier() {
 

@@ -11,7 +11,7 @@ import com.cooper.data.ArmorDecoratorRepository;
 import com.cooper.entities.ArmorDecoratorEntity;
 
 @RestController
-@RequestMapping("/armorDecorator")
+@RequestMapping("/entity/armorDecorator")
 public class ArmorDecoratorController extends BaseEntityControllerTemplate<ArmorDecoratorEntity> {
 
     public ArmorDecoratorController(

@@ -11,7 +11,7 @@ import com.cooper.data.WeaponDecoratorRepository;
 import com.cooper.entities.WeaponDecoratorEntity;
 
 @RestController
-@RequestMapping("/weaponDecorator")
+@RequestMapping("/entity/weaponDecorator")
 public class WeaponDecoratorController extends BaseEntityControllerTemplate<WeaponDecoratorEntity> {
 
     public WeaponDecoratorController(

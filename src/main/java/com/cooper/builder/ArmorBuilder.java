@@ -10,7 +10,7 @@ import com.cooper.entities.ArmorDecoratorEntity;
 import com.cooper.entities.ArmorEntity;
 import com.cooper.model.Armor;
 import com.cooper.model.ArmorBase;
-import com.cooper.model.ArmorComposite;
+import com.cooper.model.ArmorDecorator;
 
 public class ArmorBuilder extends CarryableBuilderTemplate<Armor, ArmorEntity, ArmorDecoratorEntity> {
 
@@ -30,7 +30,7 @@ public class ArmorBuilder extends CarryableBuilderTemplate<Armor, ArmorEntity, A
     protected Armor getDecoratedCarryableFromDecorEntity(
             Armor entity, ArmorDecoratorEntity decorEntity) {
 
-        return new ArmorComposite(
+        return new ArmorDecorator(
                 entity,
                 decorEntity.getName(),
                 decorEntity.getPlacement(),

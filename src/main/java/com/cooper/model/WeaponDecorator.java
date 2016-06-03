@@ -7,7 +7,7 @@ package com.cooper.model;
 import com.cooper.enums.DecoratorPlacement;
 import com.cooper.enums.DieType;
 
-public class WeaponComposite implements Weapon {
+public class WeaponDecorator implements Weapon {
 
     private Weapon baseWeapon;
 
@@ -20,7 +20,7 @@ public class WeaponComposite implements Weapon {
     private Integer numberOfDmgDice;
     private Integer baseDmg;
 
-    public WeaponComposite(
+    public WeaponDecorator(
             Weapon baseWeapon,
             String name,
             DecoratorPlacement placement,

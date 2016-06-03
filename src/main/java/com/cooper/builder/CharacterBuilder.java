@@ -17,11 +17,11 @@ import com.cooper.model.Weapon;
 
 public class CharacterBuilder {
 
-    private CarryableBuilderService builderService;
+    private CarryableBuilderFactory builderService;
     private CharacterRepository characterRepository;
 
     public CharacterBuilder(
-            CarryableBuilderService builderService,
+            CarryableBuilderFactory builderService,
             CharacterRepository characterRepository) {
 
         this.builderService = builderService;

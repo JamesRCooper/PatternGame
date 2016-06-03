@@ -45,9 +45,9 @@ public class CharacterBuilderTest {
                 character.getIdentifier());
     }
 
-    private CarryableBuilderService getMockBuilderService() {
+    private CarryableBuilderFactory getMockBuilderService() {
 
-        CarryableBuilderService service = mock(CarryableBuilderService.class);
+        CarryableBuilderFactory service = mock(CarryableBuilderFactory.class);
         when(service.buildFromCompositeEntity(any(ArmorCompositeEntity.class)))
                 .thenReturn(new ArmorBase("clothes", 1));
         when(service.buildFromCompositeEntity(any(WeaponCompositeEntity.class)))

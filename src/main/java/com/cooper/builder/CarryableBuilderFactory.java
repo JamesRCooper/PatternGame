@@ -13,14 +13,14 @@ import com.cooper.entities.sub.WeaponCompositeEntity;
 import com.cooper.model.Armor;
 import com.cooper.model.Weapon;
 
-public class CarryableBuilderService {
+public class CarryableBuilderFactory {
 
     private ArmorRepository armorRepository;
     private ArmorDecoratorRepository armorDecoratorRepository;
     private WeaponRepository weaponRepository;
     private WeaponDecoratorRepository weaponDecoratorRepository;
 
-    public CarryableBuilderService(
+    public CarryableBuilderFactory(
             ArmorRepository armorRepository,
             ArmorDecoratorRepository armorDecoratorRepository,
             WeaponRepository weaponRepository,

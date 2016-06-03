@@ -6,7 +6,7 @@ package com.cooper.model;
 
 import com.cooper.enums.DecoratorPlacement;
 
-public class ArmorComposite implements Armor {
+public class ArmorDecorator implements Armor {
 
     private Armor baseArmor;
 
@@ -14,7 +14,7 @@ public class ArmorComposite implements Armor {
     private DecoratorPlacement placement;
     private Integer baseAC;
 
-    public ArmorComposite(
+    public ArmorDecorator(
             Armor baseArmor,
             String name,
             DecoratorPlacement placement,

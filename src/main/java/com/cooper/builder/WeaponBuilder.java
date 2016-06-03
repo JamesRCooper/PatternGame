@@ -10,7 +10,7 @@ import com.cooper.entities.WeaponDecoratorEntity;
 import com.cooper.entities.WeaponEntity;
 import com.cooper.model.Weapon;
 import com.cooper.model.WeaponBase;
-import com.cooper.model.WeaponComposite;
+import com.cooper.model.WeaponDecorator;
 
 public class WeaponBuilder extends CarryableBuilderTemplate<Weapon, WeaponEntity, WeaponDecoratorEntity> {
 
@@ -36,7 +36,7 @@ public class WeaponBuilder extends CarryableBuilderTemplate<Weapon, WeaponEntity
     @Override
     protected Weapon getDecoratedCarryableFromDecorEntity(
             Weapon entity, WeaponDecoratorEntity decorEntity) {
-        return new WeaponComposite(
+        return new WeaponDecorator(
                 entity,
                 decorEntity.getName(),
                 decorEntity.getPlacement(),

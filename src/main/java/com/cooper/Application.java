@@ -6,11 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.cooper.controllers.ArmorController;
-import com.cooper.controllers.ArmorDecoratorController;
-import com.cooper.controllers.CharacterController;
-import com.cooper.controllers.WeaponController;
-import com.cooper.controllers.WeaponDecoratorController;
+import com.cooper.controllers.entity.ArmorController;
+import com.cooper.controllers.entity.ArmorDecoratorController;
+import com.cooper.controllers.entity.CharacterController;
+import com.cooper.controllers.entity.WeaponController;
+import com.cooper.controllers.entity.WeaponDecoratorController;
 import com.cooper.data.ArmorDecoratorRepository;
 import com.cooper.data.ArmorRepository;
 import com.cooper.data.CharacterRepository;

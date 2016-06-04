@@ -2,7 +2,7 @@
  * Copyright (C) 2016 by Amobee Inc.
  * All Rights Reserved.
  */
-package com.cooper.controllers;
+package com.cooper.controllers.entity;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

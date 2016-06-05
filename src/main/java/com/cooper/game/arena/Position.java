@@ -33,6 +33,22 @@ public class Position {
         return facing;
     }
 
+    public Integer getCOLUMN() {
+        return COLUMN;
+    }
+
+    public void setCOLUMN(Integer COLUMN) {
+        this.COLUMN = COLUMN;
+    }
+
+    public Integer getROW() {
+        return ROW;
+    }
+
+    public void setROW(Integer ROW) {
+        this.ROW = ROW;
+    }
+
     public boolean equals(Position obj) {
         return this.COLUMN.equals(obj.COLUMN) && this.ROW.equals(obj.ROW);
     }

@@ -21,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.cooper.container.LocalResponse;
-import com.cooper.game.arena.ActiveCharacter;
 import com.cooper.game.arena.Room;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.util.StringUtils;
+
 import com.cooper.container.LocalResponse;
 import com.cooper.enums.LocalErrorType;
-import com.cooper.game.arena.ActiveCharacter;
 import com.cooper.game.arena.Room;
 
 public class ActivePool {
@@ -36,7 +37,6 @@ public class ActivePool {
             return new LocalResponse(LocalErrorType.PLAYER_ALREADY_EXISTS);
         String playerTempId = UUID.randomUUID().toString();
         playerPool.put(playerTempId, player);
-        playerRoom.put(playerTempId, "");
         return new LocalResponse(playerTempId);
     }
 
@@ -66,7 +66,10 @@ public class ActivePool {
             return new LocalResponse(LocalErrorType.ROOM_IS_NOT_IN_POOL);
 
         ActiveCharacter player = playerPool.get(playerTempId);
-        roomPool.get(roomId).addPlayer(player);
+        LocalResponse response = roomPool.get(roomId).addPlayer(player);
+        if (!response.isSuccessful())
+            return response;
+
         playerRoom.put(playerTempId, roomId);
         return new LocalResponse(roomId);
     }
@@ -97,6 +100,19 @@ public class ActivePool {
 
     public List<ActiveCharacter> getListOfPlayers() {
         return new ArrayList<>(playerPool.values());
+    }
+
+    //TODO: add tests
+    public LocalResponse getPlayerMap(final String playerTempId) {
+
+        if(!playerPool.containsKey(playerTempId))
+            return new LocalResponse(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+        if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
+            return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        String roomId = playerRoom.get(playerTempId);
+        Room room = roomPool.get(roomId);
+        return room.getMap();
     }
 
     public void killThread() {

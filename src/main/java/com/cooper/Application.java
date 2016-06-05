@@ -1,11 +1,17 @@
 package com.cooper;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.cooper.builder.CarryableBuilderFactory;
+import com.cooper.builder.CharacterBuilder;
+import com.cooper.controllers.arena.PoolController;
 import com.cooper.controllers.entity.ArmorController;
 import com.cooper.controllers.entity.ArmorDecoratorController;
 import com.cooper.controllers.entity.CharacterController;
@@ -16,6 +22,8 @@ import com.cooper.data.ArmorRepository;
 import com.cooper.data.CharacterRepository;
 import com.cooper.data.WeaponDecoratorRepository;
 import com.cooper.data.WeaponRepository;
+import com.cooper.game.arena.Room;
+import com.cooper.game.player.ActivePool;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -58,6 +66,52 @@ public class Application implements CommandLineRunner {
     @Bean
     public CharacterController characterController() {
         return new CharacterController(characterRepository);
+    }
+
+    @Bean
+    public CarryableBuilderFactory getCarryableBuilderFactory() {
+
+        return new CarryableBuilderFactory(
+                armorRepository,
+                armorDecoratorRepository,
+                weaponRepository,
+                weaponDecoratorRepository);
+    }
+
+    @Bean
+    public CharacterBuilder getCharacterBuilder(
+            final CarryableBuilderFactory carryableBuilderFactory) {
+
+        return new CharacterBuilder(
+                carryableBuilderFactory,
+                characterRepository);
+    }
+
+    @Bean
+    public PoolController poolController(
+            final CharacterBuilder characterBuilder,
+            final ActivePool activePool) {
+
+        return new PoolController(
+                characterBuilder,
+                activePool);
+    }
+
+
+    @Bean
+    public Room getDUNGEON_1() {
+        return new Room("src/main/resources/arena/DUNGEON_1.arena");
+    }
+
+    @Bean
+    public Room getFARM_1() {
+        return new Room("src/main/resources/arena/FARM_1.arena");
+    }
+
+    @Bean
+    public ActivePool getActivePool(Room[] roomCollection) {
+        List<Room> rooms = Arrays.asList(roomCollection);
+        return new ActivePool(rooms);
     }
 
     public static void main(String[] args) {

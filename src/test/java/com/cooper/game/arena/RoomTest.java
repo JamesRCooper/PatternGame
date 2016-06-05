@@ -10,11 +10,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.cooper.container.LocalResponse;
+import com.cooper.game.player.ActiveCharacter;
 
 public class RoomTest {
 
@@ -38,6 +40,8 @@ public class RoomTest {
         assertFalse(room.addPlayer(character1, uniquePosition).isSuccessful());
         assertFalse(room.addPlayer(character2, sharedPosition).isSuccessful());
 
+        assertFalse(room.addPlayer(character1, uniquePosition).isSuccessful());
+
         assertTrue(room.removePlayer(character1).isSuccessful());
         assertFalse(room.removePlayer(character1).isSuccessful());
     }
@@ -45,21 +49,27 @@ public class RoomTest {
     @Test
     public void testPositionTypes() {
 
-        List<Position> badPositions = Collections.singletonList(
-                new Position(0, 0));
-        List<Position> goodPostions = Arrays.asList(
-                new Position(8, 1),
-                new Position(9, 3),
-                new Position(17, 6));
+        List<Direction> goodPostions = Arrays.asList(
+                Direction.E,
+                Direction.S,
+                Direction.W,
+                Direction.N);
+        List<Direction> badPositions = Arrays.asList(
+                Direction.N,
+                Direction.D,
+                Direction.U);
 
         ActiveCharacter character = getNewCharacter("name");
 
-        badPositions.forEach(
-                p -> assertFalse(room.addPlayer(character, p).isSuccessful()));
-
         assertTrue(room.addPlayer(character, new Position(1, 1)).isSuccessful());
-        goodPostions.forEach(
-                p -> assertTrue(room.movePlayer(character, p).isSuccessful()));
+        goodPostions.forEach(d -> {
+            LocalResponse response = room.movePlayer(character, d);
+            assertTrue(d.toString() + ": " + response.getErrors().toString(), response.isSuccessful());
+        });
+        badPositions.forEach(d -> {
+            LocalResponse response = room.movePlayer(character, d);
+            assertFalse(d.toString() + ": " + response.getErrors().toString(), response.isSuccessful());
+        });
     }
 
     @Test

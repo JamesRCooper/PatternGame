@@ -1,4 +1,4 @@
-package com.cooper.game.arena;
+package com.cooper.game.player;
 
 public interface ActiveCharacter {
 

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.player.ActiveCharacter;
 
 public class Room extends Thread {
 
@@ -24,10 +25,9 @@ public class Room extends Thread {
     private final List<List<Character>> map;
     private final String roomName;
     private final Position startingPosition;
+    private Map<ActiveCharacter, Position> activeCharacters;
 
     private Boolean quit = false;
-
-    private Map<ActiveCharacter, Position> activeCharacters;
 
     public Room(String fileDirectory) {
 
@@ -37,7 +37,7 @@ public class Room extends Thread {
             List<String> rows = Files.readAllLines(new File(fileDirectory).toPath());
             String[] header = rows.remove(0).split(",");
             roomName = header[0];
-            startingPosition = new Position(new Integer(header[1]), new Integer(header[2]));
+            startingPosition = new Position(new Integer(header[2]), new Integer(header[1]));
             this.map =  getCharactersFromRows(rows);
         } catch (IOException ioEx) {
             throw new RuntimeException("Arena didn't load", ioEx);
@@ -60,7 +60,7 @@ public class Room extends Thread {
 
     public LocalResponse addPlayer(ActiveCharacter player) {
 
-        if (!activeCharacters.containsKey(player))
+        if (activeCharacters.containsKey(player))
             return new LocalResponse(LocalErrorType.PLAYER_ALREADY_EXISTS);
 
         activeCharacters.put(player, startingPosition);
@@ -87,15 +87,47 @@ public class Room extends Thread {
                 .reduce(false, (bool1, bool2) -> bool1 || bool2);
     }
 
-    public LocalResponse movePlayer(ActiveCharacter player, Position position) {
+    //TODO: write test
+    public LocalResponse changePlayerDirection(ActiveCharacter player, Direction direction) {
 
         if (!activeCharacters.containsKey(player))
             return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
-        if (!OCCUPIABLE_POSITIONS.contains(map.get(position.ROW).get(position.COLUMN)))
+
+        activeCharacters.get(player).setFacing(direction);
+        return new LocalResponse();
+    }
+
+    public LocalResponse movePlayer(ActiveCharacter player, Direction direction) {
+
+        if (!activeCharacters.containsKey(player))
+            return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        Position playerPosition = activeCharacters.get(player);
+        Integer column = playerPosition.getCOLUMN();
+        Integer row = playerPosition.getROW();
+
+        switch (direction) {
+        case U:
+        case D:
+            return new LocalResponse(LocalErrorType.CANNOT_MOVE_UP_OR_DOWN);
+        case N: row -= 1;
+            break;
+        case W: column -= 1;
+            break;
+        case S: row += 1;
+            break;
+        case E: column += 1;
+            break;
+        }
+        if (!isPositionOccupiable(column, row))
             return new LocalResponse(LocalErrorType.PLAYER_CANNOT_OCCUPY_SPACE);
 
-        activeCharacters.replace(player, position);
+        activeCharacters.replace(player, new Position(column, row, playerPosition.getFacing()));
         return new LocalResponse();
+    }
+
+    private boolean isPositionOccupiable(Integer column, Integer row) {
+        return OCCUPIABLE_POSITIONS.contains(map.get(row).get(column));
     }
 
     public LocalResponse removePlayer(ActiveCharacter player) {
@@ -157,6 +189,11 @@ public class Room extends Thread {
     }
 
     private void heartbeat() {
-        System.out.println("Heartbeat: " + getRoomName());
+        String msg = "Heartbeat: " + getRoomName();
+        msg = activeCharacters.keySet()
+                .stream()
+                .map(ActiveCharacter::getIdentifier)
+                .reduce(msg, (m, p) -> "\n" + m + p);
+        System.out.println(msg);
     }
 }

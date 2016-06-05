@@ -28,3 +28,19 @@ This list shows examples where different design patterns are used. This list doe
 - Facade and Proxy Patterns - If ever the code consumes another REST API, a RestConsumer class and a facade can make it appears as entities exists locally.
  
 - Adapter Pattern - This may be usefull for Characters, as a different interface is needed if they are fighting, or training, or talking, etc. 
+
+<b> About the Game itself </b>
+
+In order to avoid feature-creep, and to avoid paralisis, I decided to use a method where I would have a single feature to work on. If, while I was working on that feature, I cam up with another idea or thought of a way to refactor things, I would create a new bullet point in a document. The doucment is split into three sections: completed, active, and future.
+
+I quickly realized I had inadvertently started scrumming my work.
+
+https://docs.google.com/document/d/1H9YTUnVtJisoRmlrCE6QdXmPY1DN3dTfzWFvPX2taCc/edit?usp=sharing
+
+Unfortunately, the game, as of yet, does not feature a gui. Instead you actually have to use the standard GET-POST-PUT-DELETE requests in order to interact. The game is, currently, split into two parts. In one part, characters, weapons, armor, can be created and updated. 
+In the second part, a character can be uploaded into an active pool. From here, the character canbe moved between rooms, and move within the room. As of yet, the character is unable to interact with the room. Maps of the rooms can be retrieved with overlays of character positions. The maps are ASCII maps (thin dwarf fortress). Unfortunately, there is no current way to upload new maps.
+
+<b>How to Run the game locally</b>
+
+If you want to run the game locally, you'll have to make a few changes. First is the easy change: in order to load in characters, the lines at the bottom of src/main/java/com/cooper/Application.java should be uncommented (you should recomment them after the first time the game is run). Second is the hard change: in src/main/resources/application.properties is a line that starts with "spring.data.mongodb.uri". You'll have to replace the value of this field with the destination of your own mongodb. I use mongolab, but you can also use a local installation of mongodb. As this process is complicated, I feel doing a google search will serve you better in setting this up then any way i could explain it.
+Each room runs in its own thread, which allows for "heartbeats", or periodic updates for characters performing a specific action. (As of yet, the hearts just announce themselves and nothing else).

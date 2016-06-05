@@ -24,7 +24,10 @@ public class ActivePool {
 
     public ActivePool(List<Room> rooms) {
 
-        rooms.forEach(rm -> roomPool.put(rm.getRoomName(), rm));
+        rooms.forEach(rm -> {
+            roomPool.put(rm.getRoomName(), rm);
+            rm.start();
+        });
     }
 
     public LocalResponse addPlayerToPool(ActiveCharacter player) {
@@ -94,5 +97,9 @@ public class ActivePool {
 
     public List<ActiveCharacter> getListOfPlayers() {
         return new ArrayList<>(playerPool.values());
+    }
+
+    public void killThread() {
+        roomPool.forEach((name, room) -> room.quit());
     }
 }

@@ -17,13 +17,15 @@ import java.util.stream.Collectors;
 import com.cooper.container.LocalResponse;
 import com.cooper.enums.LocalErrorType;
 
-public class Room {
+public class Room extends Thread {
 
     public static List<Character> OCCUPIABLE_POSITIONS = Arrays.asList('_', 'D', 'O', 'L');
 
     private final List<List<Character>> map;
     private final String roomName;
     private final Position startingPosition;
+
+    private Boolean quit = false;
 
     private Map<ActiveCharacter, Position> activeCharacters;
 
@@ -134,5 +136,27 @@ public class Room {
                 .stream()
                 .map(String::valueOf)
                 .reduce("", (full, row) -> full + row + "\n");
+    }
+
+
+    @Override
+    public void run() {
+
+        try {
+            while (!quit) {
+                heartbeat();
+                Thread.sleep(2000);
+            }
+        } catch (InterruptedException iEx) {
+            System.out.println("intterupt occured");
+        }
+    }
+
+    public void quit() {
+        quit = true;
+    }
+
+    private void heartbeat() {
+        System.out.println("Heartbeat: " + getRoomName());
     }
 }

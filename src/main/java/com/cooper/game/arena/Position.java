@@ -6,22 +6,22 @@ package com.cooper.game.arena;
 
 public class Position {
 
-    Integer X;
-    Integer Y;
+    Integer COLUMN;
+    Integer ROW;
     private Direction facing;
 
     public Position() {
     }
 
-    public Position(Integer x, Integer y) {
-        X = x;
-        Y = y;
+    public Position(Integer COLUMN, Integer ROW) {
+        this.COLUMN = COLUMN;
+        this.ROW = ROW;
         this.facing = Direction.N;
     }
 
-    public Position(Integer x, Integer y, Direction facing) {
-        X = x;
-        Y = y;
+    public Position(Integer COLUMN, Integer ROW, Direction facing) {
+        this.COLUMN = COLUMN;
+        this.ROW = ROW;
         this.facing = facing;
     }
 
@@ -34,6 +34,6 @@ public class Position {
     }
 
     public boolean equals(Position obj) {
-        return this.X.equals(obj.X) && this.Y.equals(obj.Y);
+        return this.COLUMN.equals(obj.COLUMN) && this.ROW.equals(obj.ROW);
     }
 }

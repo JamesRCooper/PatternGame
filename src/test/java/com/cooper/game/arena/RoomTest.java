@@ -10,6 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class RoomTest {
 
     @Before
     public void setUp() {
-        room = new Room("src/test/resources/arena/TESTING_ROOM.arena");
+        room = new Room("src/test/resources/arena/DUNGEON_TESTING.arena");
     }
 
     @Test
@@ -32,19 +33,19 @@ public class RoomTest {
         ActiveCharacter character1 = getNewCharacter("Steve");
         ActiveCharacter character2 = getNewCharacter("Tony");
 
-        room.addCharacter(character1, sharedPosition);
+        room.addPlayer(character1, sharedPosition);
 
-        assertFalse(room.addCharacter(character1, uniquePosition));
-        assertFalse(room.addCharacter(character2, sharedPosition));
+        assertFalse(room.addPlayer(character1, uniquePosition).isSuccessful());
+        assertFalse(room.addPlayer(character2, sharedPosition).isSuccessful());
 
-        assertTrue(room.removeCharacter(character1));
-        assertFalse(room.removeCharacter(character1));
+        assertTrue(room.removePlayer(character1).isSuccessful());
+        assertFalse(room.removePlayer(character1).isSuccessful());
     }
 
     @Test
     public void testPositionTypes() {
 
-        List<Position> badPositions = Arrays.asList(
+        List<Position> badPositions = Collections.singletonList(
                 new Position(0, 0));
         List<Position> goodPostions = Arrays.asList(
                 new Position(8, 1),
@@ -54,11 +55,11 @@ public class RoomTest {
         ActiveCharacter character = getNewCharacter("name");
 
         badPositions.forEach(
-                p -> assertFalse(room.addCharacter(character, p)));
+                p -> assertFalse(room.addPlayer(character, p).isSuccessful()));
 
-        assertTrue(room.addCharacter(character, new Position(1, 1)));
+        assertTrue(room.addPlayer(character, new Position(1, 1)).isSuccessful());
         goodPostions.forEach(
-                p -> assertTrue(room.moveCharacter(character, p)));
+                p -> assertTrue(room.movePlayer(character, p).isSuccessful()));
     }
 
     @Test
@@ -67,11 +68,10 @@ public class RoomTest {
         ActiveCharacter character1 = getNewCharacter("Martin");
         ActiveCharacter character2 = getNewCharacter("Jake");
 
-        room.addCharacter(character1, new Position(1, 1));
-        room.addCharacter(character2, new Position(9, 3));
+        room.addPlayer(character1, new Position(1, 1));
+        room.addPlayer(character2, new Position(9, 3));
 
-        String asdf = room.getMap();
-        System.out.println(asdf);
+        System.out.println(room.getMap());
     }
 
     public ActiveCharacter getNewCharacter(final String name) {

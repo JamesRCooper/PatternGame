@@ -42,8 +42,8 @@ public class PoolController {
         return pool.getListOfPlayers();
     }
 
-    @RequestMapping("/place/{characterName}")
-    public LocalResponse placePlayerInPool(@PathVariable final String characterName) {
+    @RequestMapping(value = "/place", params = {"characterName"})
+    public LocalResponse placePlayerInPool(@RequestParam final String characterName) {
 
         Character loadedCharacter = builder.build(characterName);
         if (loadedCharacter == null)
@@ -53,17 +53,17 @@ public class PoolController {
         return pool.addPlayerToPool(player);
     }
 
-    @RequestMapping(value = "/moveToRoom/{roomName}", params = {"activeId"})
+    @RequestMapping(value = "/moveToRoom", params = {"activeId", "roomName"})
     public LocalResponse movePlayerToRoom(
-            @PathVariable String roomName,
+            @RequestParam String roomName,
             @RequestParam String activeId) {
 
         return pool.putPlayerInRoom(activeId, roomName);
     }
 
     @RequestMapping(value = "/map", params = {"activeId"})
-    public LocalResponse getOverlaidMap(@RequestParam String activeId) {
+    public String getOverlaidMap(@RequestParam String activeId) {
 
-        return pool.getPlayerMap(activeId);
+        return pool.getPlayerMap(activeId).getMessage();
     }
 }

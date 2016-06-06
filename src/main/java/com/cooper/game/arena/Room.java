@@ -167,9 +167,8 @@ public class Room extends Thread {
         return overlayArray
                 .stream()
                 .map(String::valueOf)
-                .reduce("", (full, row) -> full + row + "\n");
+                .reduce("", (full, row) -> full + row + "\n\r");
     }
-
 
     @Override
     public void run() {

@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.RequestedResponse;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.player.ActiveCharacter;
 
@@ -139,11 +140,11 @@ public class Room extends Thread {
         return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
     }
 
-    public LocalResponse getMap() {
+    public RequestedResponse<String> getMap() {
 
         List<List<Character>> overlaidMap = getCopyOfMap();
         insertCharacterTokensIntoMap(overlaidMap);
-        return new LocalResponse(convertMapToString(overlaidMap));
+        return new RequestedResponse<>(convertMapToString(overlaidMap));
     }
 
     private List<List<Character>> getCopyOfMap() {
@@ -162,12 +163,14 @@ public class Room extends Thread {
         activeCharacters.forEach((c, p) -> overlaidMap.get(p.ROW).set(p.COLUMN, 'U'));
     }
 
-    private String convertMapToString(List<List<Character>> overlayArray) {
+    private List<String> convertMapToString(List<List<Character>> overlayArray) {
 
-        return overlayArray
-                .stream()
-                .map(String::valueOf)
-                .reduce("", (full, row) -> full + row + "\n\r");
+        List<String> newMpa = new ArrayList<>();
+        overlayArray.forEach(row -> {
+            String tmp = row.stream().map(e -> e.toString()).collect(Collectors.joining());
+            newMpa.add(tmp);
+        });
+        return newMpa;
     }
 
     @Override

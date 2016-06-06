@@ -13,6 +13,7 @@ import java.util.UUID;
 import org.springframework.util.StringUtils;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.RequestedResponse;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.arena.Room;
@@ -104,12 +105,14 @@ public class ActivePool {
     }
 
     //TODO: add tests
-    public LocalResponse getPlayerMap(final String playerTempId) {
+    public RequestedResponse<String> getPlayerMap(final String playerTempId) {
 
         if(!playerPool.containsKey(playerTempId))
-            return new LocalResponse(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+            return new RequestedResponse<>(
+                    new LocalResponse(LocalErrorType.PLAYER_IS_NOT_IN_POOL).toString());
         if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
-            return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
+            return new RequestedResponse<>(
+                    new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM).toString());
 
         String roomId = playerRoom.get(playerTempId);
         Room room = roomPool.get(roomId);

@@ -1,20 +1,29 @@
 <html>
 <head>
     <title>Move your Character</title>
+    <style>
+        iframe {
+            height: 300px;
+            width: 150px;
+            resize: horizontal;
+        }
+    </style>
 </head>
     <body>
-    After you move the character, this page should refresh. You'll then have to go to the mape page in order
-    to see where the character is now. This is horribly inneficient; but its done in pure html. With a little
-    JavaScript, this could be done in a very smooth action.
+    After you move the character, you'll have to refresh the map. Resize the map until the columns line up.
     <br>
-    I shoudl probably metnion that your character is represented by a 'U'.
+    I should probably metnion that your character is represented by a 'U'.
     <br>
-    <form action="" method="get" target="_self">
+    <form action="" method="get" target="move_response_frame">
         ID: <input type="text" name="activeId"><br>
         <input type="submit" value="North" formaction="/pool/character/move/N"><br>
         <input type="submit" value="West" formaction="/pool/character/move/W">
+        <input type="submit" value="Refesh" formaction="/pool/map" formtarget="map_frame">
         <input type="submit" value="East" formaction="/pool/character/move/E"><br>
         <input type="submit" value="South" formaction="/pool/character/move/S"><br>
     </form>
+    <iframe src="" name="move_response_frame"></iframe>
+    <br><br>
+    <iframe src="" name="map_frame" ></iframe>
     </body>
 </html>

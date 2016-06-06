@@ -2,13 +2,13 @@ package com.cooper.controllers.arena;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooper.builder.CharacterBuilder;
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.RequestedResponse;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.player.ActiveCharacter;
 import com.cooper.game.player.ActivePlayer;
@@ -62,8 +62,8 @@ public class PoolController {
     }
 
     @RequestMapping(value = "/map", params = {"activeId"})
-    public String getOverlaidMap(@RequestParam String activeId) {
+    public RequestedResponse getOverlaidMap(@RequestParam String activeId) {
 
-        return pool.getPlayerMap(activeId).getMessage();
+        return pool.getPlayerMap(activeId);
     }
 }

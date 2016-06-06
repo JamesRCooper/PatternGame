@@ -81,7 +81,9 @@ public class RoomTest {
         room.addPlayer(character1, new Position(1, 1));
         room.addPlayer(character2, new Position(9, 3));
 
-        System.out.println(room.getMap());
+        room.getMap().getObjects().forEach(
+                System.out::println
+        );
     }
 
     public ActiveCharacter getNewCharacter(final String name) {

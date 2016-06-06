@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.arena.Direction;
 import com.cooper.game.arena.Room;
 
 public class ActivePool {
@@ -113,6 +114,21 @@ public class ActivePool {
         String roomId = playerRoom.get(playerTempId);
         Room room = roomPool.get(roomId);
         return room.getMap();
+    }
+
+    //TODO: add test
+    public LocalResponse movePlayer(final String playerTempId, final Direction direction) {
+
+        if(!playerPool.containsKey(playerTempId))
+            return new LocalResponse(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+        if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
+            return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        String roomId = playerRoom.get(playerTempId);
+        Room room = roomPool.get(roomId);
+        ActiveCharacter player = playerPool.get(playerTempId);
+
+        return room.movePlayer(player, direction);
     }
 
     public void killThread() {

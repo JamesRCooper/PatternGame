@@ -3,6 +3,91 @@
         <title>Coopers Game</title>
     </head>
     <body>
-        <b>Hello, World!</b>
+        <b>CREATE ARMOR</b>
+        <form action="/entity/armor/" method="post" enctype="application/x-www-form-urlencoded" novalidate>
+            Type (don't change):
+            <input type="text" name="type" value="ARMOR"><br>
+            Identifier (unique name):
+            <input type="text" name="identifier" value=""><br>
+            Name:
+            <input type="text" name="name" value=""><br>
+            BaseAC:
+            <input type="number" name = "baseAC"><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <b>CREATE ARMOR DECORATOR</b>
+        <form action="/entity/armorDecorator/" method="post" novalidate>
+            Type (don't change):
+            <input type="text" name="type" value="ARMOR_DECORATOR"><br>
+            Identifier:
+            <input type="text" name="identifier" value=""><br>
+            Name:
+            <input type="text" name="name" value=""><br>
+            Placement:
+            <input list="position" name="placement"><br>
+            AC augment:
+            <input type="number" name="baseAC"><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <b>CREATE WEAPON</b>
+        <form action="/entity/weapon/" method="post" enctype="application/x-www-form-urlencoded" novalidate>
+            Type (don't change):
+            <input type="text" name="type" value="WEAPON"><br>
+            Identifier:
+            <input type="text" name="identifier" value=""><br>
+            Name:
+            <input type="text" name="name" value=""><br>
+            (dmg) Type of dice:
+            <input list="dice" name="dmg.size"><br>
+            (dmg) Number of dice:
+            <input type="number" name="dmg.number"><br>
+            (dmg) Base dmg:
+            <input type="number" name="dmg.base"><br>
+            (hit) Type of dice:
+            <input list="dice" name="hit.size"><br>
+            (hit) Number of dice:
+            <input type="number" name="hit.number"><br>
+            (hit) Base hit:
+            <input type="number" name="hit.base"><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <b>CREATE WEAPON DECORATOR</b>
+        <form action="/entity/weaponDecorator" method="post" novalidate>
+            Type (don't change):
+            <input type="text" name="type" value="WEAPON_DECORATOR"><br>
+            Identifier:
+            <input type="text" name="identifier" value=""><br>
+            Name:
+            <input type="text" name="name" value=""><br>
+            Placement:
+            <input list="position" name="placement"><br>
+            (dmg) Type of dice:
+            <input list="dice" name="dmg.size"><br>
+            (dmg) Number of dice:
+            <input type="number" name="dmg.number"><br>
+            (dmg) Base dmg:
+            <input type="number" name="dmg.base"><br>
+            (hit) Type of dice:
+            <input list="dice" name="hit.size"><br>
+            (hit) Number of dice:
+            <input type="number" name="hit.number"><br>
+            (hit) Base hit:
+            <input type="number" name="hit.base"><br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
+
+
+    <datalist id="position">
+        <option value="Prefix">
+        <option value="Postfix">
+    </datalist>
+    <datalist id="dice">
+        <option value="D2">
+        <option value="D6">
+        <option value="D20">
+    </datalist>
 </html>

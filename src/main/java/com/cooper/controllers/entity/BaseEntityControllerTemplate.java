@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public abstract class BaseEntityControllerTemplate<Q extends CarryableEntity> {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Q postEntity(@RequestBody Q newEntity) {
+    public Q postEntity(@ModelAttribute Q newEntity) {
 
         String id = newEntity.getIdentifier();
         if (StringUtils.isEmpty(id)) {

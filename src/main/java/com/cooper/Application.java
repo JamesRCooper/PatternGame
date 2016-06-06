@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import com.cooper.builder.CarryableBuilderFactory;
 import com.cooper.builder.CharacterBuilder;
 import com.cooper.controllers.arena.PoolController;
+import com.cooper.controllers.arena.RoomController;
 import com.cooper.controllers.entity.ArmorController;
 import com.cooper.controllers.entity.ArmorDecoratorController;
 import com.cooper.controllers.entity.CharacterController;
@@ -97,6 +98,10 @@ public class Application implements CommandLineRunner {
                 activePool);
     }
 
+    @Bean
+    public RoomController roomController(ActivePool activePool) {
+        return new RoomController(activePool);
+    }
 
     @Bean
     public Room getDUNGEON_1() {

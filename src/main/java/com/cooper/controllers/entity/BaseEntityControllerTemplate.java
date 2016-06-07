@@ -41,7 +41,7 @@ public abstract class BaseEntityControllerTemplate<Q extends CarryableEntity> {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Q postEntity(@ModelAttribute Q newEntity) {
+    public Q postEntity(@RequestBody Q newEntity) {
 
         String id = newEntity.getIdentifier();
         if (StringUtils.isEmpty(id)) {

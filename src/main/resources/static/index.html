@@ -8,8 +8,9 @@
     </head>
     <body ng-app="entityRestApp">
 
-    This page is still being worked on. Currently only armor/armorDecorators can be uploaded (which isn't very
-    helpful).
+    Hit the refresh button over any catagory to see a lit of items already created. When giving an identifer,
+    plase stick to letters andunderscores (no spaces of other special characters). For player names, please
+    stick to single names (no spaces).
     <br><br>
     <div ng-controller="armorController">
         <ol>
@@ -78,7 +79,7 @@
         </ol>
         <input type="submit" ng-click="getEntity()" value="refresh">
         <br><br>
-        <b>CREATE WEAPON</b><br>
+        <b>CREATE WEAPON DECORATOR</b><br>
         Identifier (unique name): <input type="text" ng-model="weapon.identifier" value=""><br>
         Name: <input type="text" ng-model="weapon.name" value=""><br>
         Placement: <input list="position" ng-model="weapon.placement"><br>
@@ -87,6 +88,26 @@
         <input type="submit" ng-click="postEntity(weapon)" value="Save">
         <input type="submit" ng-click="putEntity(weapon)" value="Update">
         <input type="submit" ng-click="deleteEntity(weapon)" value="Delete"><br>
+    </div>
+
+    <div ng-controller="characterController">
+        <ol>
+            <li ng-repeat="entity in entityResponse">
+                {{ 'Name (identifier): ' + entity.name + ', race: ' + entity.raceType + ', class: ' + entity.classType }}<br>
+                {{ '.   str: ' + entity.strength + ', con: '+ entity.constitution + ', dex: ' + entity.dexterity + ', int: ' + entity.intelligence + ', wis: ' + entity.wisdom + ', cha: ' + entity.charisma }}<br>
+                {{ '.   Main Hand: ' + entity.mainHand.baseIdentifier + ', decorators: ' + entity.mainHand.decorators }}<br>
+                {{ '.   Off Hand: ' + entity.offHand.baseIdentifier + ', decorators: ' + entity.offHand.decorators }}<br>
+                {{ '.   Armor: ' + entity.armor.baseIdentifier + ', decorators: ' + entity.armor.decorators }}
+            </li>
+        </ol>
+        <input type="submit" ng-click="getEntity()" value="refresh">
+        <br>
+        Names: <input type="text" ng-model="character.name"><br>
+        Race: <input list="race" ng-model="character.raceType"><br>
+        Class: <input list="class" ng-model="character.classType"><br>
+        <input type="submit" ng-click="postEntity(character)" value="Save">
+        <input type="submit" ng-click="putEntity(character)" value="Update">
+        <input type="submit" ng-click="deleteEntity(character)" value="Delete"><br>
     </div>
 
     </body>
@@ -105,5 +126,15 @@
         <option value="D10">
         <option value="D12">
         <option value="D20">
+    </datalist>
+    <datalist id="race">
+        <option value="HUMAN">
+        <option value="HALFLING">
+        <option value="ELF">
+    </datalist>
+    <datalist id="class">
+        <option value="ROGUE">
+        <option value="WARRIOR">
+        <option value="CLERIC">
     </datalist>
 </html>

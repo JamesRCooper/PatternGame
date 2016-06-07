@@ -2,6 +2,7 @@ package com.cooper.enums;
 
 public enum RaceType {
 
+    HUMAN(0, 0, 0, 0, 0, 0),
     HALFLING(0, 0, 2, 0, 2, 0),
     ELF(0, 0, 2, 0, 0, 2);
 

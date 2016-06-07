@@ -1,98 +1,109 @@
 <html>
     <head>
         <title>Coopers Game</title>
+        <meta charset="utf-8" />
+        <!-- Initialize scripts. -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="/entityRestApp.js"></script>
     </head>
-    <body>
+    <body ng-app="entityRestApp">
+
     This page is still being worked on. Currently only armor/armorDecorators can be uploaded (which isn't very
-    helpful). However, there are preloaded characters you can have fun with <a href="/st/character.html">here
-    </a>.
+    helpful).
+    <br><br>
+    <div ng-controller="armorController">
+        <ol>
+            <li ng-repeat = "entity in entityResponse">
+                {{ 'Identifier: ' + entity.identifier + ', name: ' + entity.name + ', baseAC: ' + entity.baseAC }}
+            </li>
+        </ol>
+        <input type="submit" ng-click="getEntity()" value="refresh">
+        <br><br>
+        <b>CREATE ARMOR</b><br>
+        Identifier (unique name): <input type="text" ng-model="armor.identifier" value=""><br>
+        Name: <input type="text" ng-model="armor.name" value=""><br>
+        BaseAC: <input type="number" ng-model="armor.baseAC"><br>
+        <input type="submit" ng-click="postEntity(armor)" value="Save">
+        <input type="submit" ng-click="putEntity(armor)" value="Update">
+        <input type="submit" ng-click="deleteEntity(armor)" value="Delete"><br>
+    </div>
+
     <br><br>
 
-        <b>CREATE ARMOR</b>
-        <form action="/entity/armor/" method="post" enctype="application/x-www-form-urlencoded" novalidate>
-            Type (don't change):
-            <input type="text" name="type" value="ARMOR"><br>
-            Identifier (unique name):
-            <input type="text" name="identifier" value=""><br>
-            Name:
-            <input type="text" name="name" value=""><br>
-            BaseAC:
-            <input type="number" name = "baseAC"><br>
-            <input type="submit" value="Submit">
-        </form>
+    <div ng-controller="armorDecoratorController">
+        <ol>
+            <li ng-repeat = "entity in entityResponse">
+                {{ 'Identifier: ' + entity.identifier + ', name: ' + entity.name + ', placement: ' + entity.placement + ', baseAC: ' + entity.baseAC }}
+            </li>
+        </ol>
+        <input type="submit" ng-click="getEntity()" value="refresh">
+        <br><br>
+        <b>CREATE ARMOR DECORATOR</b><br>
+        Identifier (unique name): <input type="text" ng-model="armorDecorator.identifier" value=""><br>
+        Name: <input type="text" ng-model="armorDecorator.name" value=""><br>
+        Placement: <input list="position" ng-model="armorDecorator.placement"><br>
+        BaseAC: <input type="number" ng-model="armorDecorator.baseAC"><br>
+        <input type="submit" ng-click="postEntity(armorDecorator)" value="Save">
+        <input type="submit" ng-click="putEntity(armorDecorator)" value="Update">
+        <input type="submit" ng-click="deleteEntity(armorDecorator)" value="Delete"><br>
+    </div>
 
-        <b>CREATE ARMOR DECORATOR</b>
-        <form action="/entity/armorDecorator/" method="post" novalidate>
-            Type (don't change):
-            <input type="text" name="type" value="ARMOR_DECORATOR"><br>
-            Identifier:
-            <input type="text" name="identifier" value=""><br>
-            Name:
-            <input type="text" name="name" value=""><br>
-            Placement:
-            <input list="position" name="placement"><br>
-            AC augment:
-            <input type="number" name="baseAC"><br>
-            <input type="submit" value="Submit">
-        </form>
+    <div ng-controller="weaponController">
+        <ol>
+            <li ng-repeat="entity in entityResponse">
+                {{ 'Identifier: ' + entity.identifier + ', name: ' + entity.name }}<br>
+                {{ '    dmg: ' + entity.dmg.number + entity.dmg.size + '+' + entity.dmg.base }}<br>
+                {{ '    hit: ' + entity.hit.number + entity.hit.size + '+' + entity.hit.base }}
+            </li>
+        </ol>
+        <input type="submit" ng-click="getEntity()" value="refresh">
+        <br><br>
+        <b>CREATE WEAPON</b><br>
+        Identifier (unique name): <input type="text" ng-model="weapon.identifier" value=""><br>
+        Name: <input type="text" ng-model="weapon.name" value=""><br>
+        dmg: <input type="number" ng-model="weapon.dmg.number"><input list="dice" ng-model="weapon.dmg.size">+<input type="number" ng-model="weapon.dmg.base"><br>
+        hit: <input type="number" ng-model="weapon.hit.number"><input list="dice" ng-model="weapon.hit.size">+<input type="number" ng-model="weapon.hit.base"><br>
+        <input type="submit" ng-click="postEntity(weapon)" value="Save">
+        <input type="submit" ng-click="putEntity(weapon)" value="Update">
+        <input type="submit" ng-click="deleteEntity(weapon)" value="Delete"><br>
+    </div>
 
-        <b>CREATE WEAPON</b>
-        <form action="/entity/weapon/" method="post" enctype="application/x-www-form-urlencoded" novalidate>
-            Type (don't change):
-            <input type="text" name="type" value="WEAPON"><br>
-            Identifier:
-            <input type="text" name="identifier" value=""><br>
-            Name:
-            <input type="text" name="name" value=""><br>
-            (dmg) Type of dice:
-            <input list="dice" name="dmg.size"><br>
-            (dmg) Number of dice:
-            <input type="number" name="dmg.number"><br>
-            (dmg) Base dmg:
-            <input type="number" name="dmg.base"><br>
-            (hit) Type of dice:
-            <input list="dice" name="hit.size"><br>
-            (hit) Number of dice:
-            <input type="number" name="hit.number"><br>
-            (hit) Base hit:
-            <input type="number" name="hit.base"><br>
-            <input type="submit" value="Submit">
-        </form>
+    <div ng-controller="weaponDecoratorController">
+        <ol>
+            <li ng-repeat="entity in entityResponse">
+                {{ 'Identifier: ' + entity.identifier + ', name: ' + entity.name + ', placement: ' + entity.placement }}<br>
+                {{ '    dmg: ' + entity.dmg.number + entity.dmg.size + '+' + entity.dmg.base }}<br>
+                {{ '    hit: ' + entity.hit.number + entity.hit.size + '+' + entity.hit.base }}
+            </li>
+        </ol>
+        <input type="submit" ng-click="getEntity()" value="refresh">
+        <br><br>
+        <b>CREATE WEAPON</b><br>
+        Identifier (unique name): <input type="text" ng-model="weapon.identifier" value=""><br>
+        Name: <input type="text" ng-model="weapon.name" value=""><br>
+        Placement: <input list="position" ng-model="weapon.placement"><br>
+        dmg: <input type="number" ng-model="weapon.dmg.number"><input list="dice" ng-model="weapon.dmg.size">+<input type="number" ng-model="weapon.dmg.base"><br>
+        hit: <input type="number" ng-model="weapon.hit.number"><input list="dice" ng-model="weapon.hit.size">+<input type="number" ng-model="weapon.hit.base"><br>
+        <input type="submit" ng-click="postEntity(weapon)" value="Save">
+        <input type="submit" ng-click="putEntity(weapon)" value="Update">
+        <input type="submit" ng-click="deleteEntity(weapon)" value="Delete"><br>
+    </div>
 
-        <b>CREATE WEAPON DECORATOR</b>
-        <form action="/entity/weaponDecorator" method="post" novalidate>
-            Type (don't change):
-            <input type="text" name="type" value="WEAPON_DECORATOR"><br>
-            Identifier:
-            <input type="text" name="identifier" value=""><br>
-            Name:
-            <input type="text" name="name" value=""><br>
-            Placement:
-            <input list="position" name="placement"><br>
-            (dmg) Type of dice:
-            <input list="dice" name="dmg.size"><br>
-            (dmg) Number of dice:
-            <input type="number" name="dmg.number"><br>
-            (dmg) Base dmg:
-            <input type="number" name="dmg.base"><br>
-            (hit) Type of dice:
-            <input list="dice" name="hit.size"><br>
-            (hit) Number of dice:
-            <input type="number" name="hit.number"><br>
-            (hit) Base hit:
-            <input type="number" name="hit.base"><br>
-            <input type="submit" value="Submit">
-        </form>
     </body>
 
 
     <datalist id="position">
-        <option value="Prefix">
-        <option value="Postfix">
+        <option value="PREFIX">
+        <option value="POSTFIX">
     </datalist>
     <datalist id="dice">
+        <option value="D0">
         <option value="D2">
+        <option value="D4">
         <option value="D6">
+        <option value="D8">
+        <option value="D10">
+        <option value="D12">
         <option value="D20">
     </datalist>
 </html>

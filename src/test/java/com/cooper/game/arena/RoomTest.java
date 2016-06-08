@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cooper.container.LocalResponse;
-import com.cooper.game.player.ActiveCharacter;
+import com.cooper.game.character.ActiveCharacter;
 
 public class RoomTest {
 

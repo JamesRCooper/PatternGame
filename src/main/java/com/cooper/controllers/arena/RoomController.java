@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.game.arena.Direction;
-import com.cooper.game.player.ActivePool;
+import com.cooper.game.pool.ActivePool;
 
 @CrossOrigin(origins = "*")
 @RestController

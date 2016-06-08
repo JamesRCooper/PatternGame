@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooper.data.WeaponRepository;
-import com.cooper.entities.WeaponEntity;
+import com.cooper.creator.data.WeaponRepository;
+import com.cooper.creator.entities.WeaponEntity;
 
 @CrossOrigin(origins = "*")
 @RestController

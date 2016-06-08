@@ -9,8 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.cooper.builder.CarryableBuilderFactory;
-import com.cooper.builder.CharacterBuilder;
+import com.cooper.creator.builder.CarryableBuilderFactory;
+import com.cooper.creator.builder.CharacterBuilder;
 import com.cooper.controllers.arena.PoolController;
 import com.cooper.controllers.arena.RoomController;
 import com.cooper.controllers.entity.ArmorController;
@@ -18,13 +18,13 @@ import com.cooper.controllers.entity.ArmorDecoratorController;
 import com.cooper.controllers.entity.CharacterController;
 import com.cooper.controllers.entity.WeaponController;
 import com.cooper.controllers.entity.WeaponDecoratorController;
-import com.cooper.data.ArmorDecoratorRepository;
-import com.cooper.data.ArmorRepository;
-import com.cooper.data.CharacterRepository;
-import com.cooper.data.WeaponDecoratorRepository;
-import com.cooper.data.WeaponRepository;
+import com.cooper.creator.data.ArmorDecoratorRepository;
+import com.cooper.creator.data.ArmorRepository;
+import com.cooper.creator.data.CharacterRepository;
+import com.cooper.creator.data.WeaponDecoratorRepository;
+import com.cooper.creator.data.WeaponRepository;
 import com.cooper.game.arena.Room;
-import com.cooper.game.player.ActivePool;
+import com.cooper.game.pool.ActivePool;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {

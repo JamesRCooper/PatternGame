@@ -15,9 +15,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.cooper.container.LocalResponse;
-import com.cooper.dto.RequestedResponse;
-import com.cooper.enums.LocalErrorType;
-import com.cooper.game.player.ActiveCharacter;
+import com.cooper.creator.dto.RequestedResponse;
+import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.game.character.ActiveCharacter;
 
 public class Room extends Thread {
 

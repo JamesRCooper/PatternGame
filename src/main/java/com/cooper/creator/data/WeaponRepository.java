@@ -1,0 +1,12 @@
+/*
+ * Copyright (C) 2016 by Amobee Inc.
+ * All Rights Reserved.
+ */
+package com.cooper.creator.data;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.cooper.creator.entities.WeaponEntity;
+
+public interface WeaponRepository extends MongoRepository<WeaponEntity, String> {
+}

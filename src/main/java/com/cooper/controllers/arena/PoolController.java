@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooper.builder.CharacterBuilder;
+import com.cooper.creator.builder.CharacterBuilder;
 import com.cooper.container.LocalResponse;
-import com.cooper.dto.RequestedResponse;
-import com.cooper.enums.LocalErrorType;
-import com.cooper.game.player.ActiveCharacter;
-import com.cooper.game.player.ActivePlayer;
-import com.cooper.game.player.ActivePool;
-import com.cooper.model.Character;
+import com.cooper.creator.dto.RequestedResponse;
+import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.character.ActivePlayer;
+import com.cooper.game.pool.ActivePool;
+import com.cooper.creator.model.Character;
 
 @CrossOrigin(origins = "*")
 @RestController

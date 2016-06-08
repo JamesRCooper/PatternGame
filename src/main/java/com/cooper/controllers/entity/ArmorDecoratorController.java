@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooper.data.ArmorDecoratorRepository;
-import com.cooper.entities.ArmorDecoratorEntity;
+import com.cooper.creator.data.ArmorDecoratorRepository;
+import com.cooper.creator.entities.ArmorDecoratorEntity;
 
 @CrossOrigin
 @RestController

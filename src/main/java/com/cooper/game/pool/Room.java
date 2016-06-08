@@ -121,7 +121,7 @@ public class Room extends Thread {
     }
 
     //TODO: write test
-    public LocalResponse changePlayerDirection(ActiveCharacter player, Direction direction) {
+    public LocalResponse facePlayer(ActiveCharacter player, Direction direction) {
 
         if (!activeCharacters.containsKey(player))
             return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
@@ -194,7 +194,7 @@ public class Room extends Thread {
     private void insertCharacterTokensIntoMap(List<List<Character>> overlaidMap) {
 
         activeCharacters.forEach((c, p) ->
-                overlaidMap.get(p.ROW).set(p.COLUMN, 'U'));
+                overlaidMap.get(p.ROW).set(p.COLUMN, p.getFacing().getSymbol()));
     }
 
     private void insertBlockTokensIntoMap(List<List<Character>> overlaidMap) {

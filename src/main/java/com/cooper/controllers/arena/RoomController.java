@@ -28,4 +28,12 @@ public class RoomController {
 
         return pool.movePlayer(activeId, direction);
     }
+
+    @RequestMapping(value = "/face/{orientation}", params = {"activeId"})
+    public LocalResponse faceCharacter(
+            @PathVariable Direction direction,
+            @RequestParam String activeId) {
+
+        return pool.facePlayer(activeId, direction);
+    }
 }

@@ -134,6 +134,21 @@ public class ActivePool {
         return room.movePlayer(player, direction);
     }
 
+    //TODO: add test
+    public LocalResponse facePlayer(final String playerTempId, final Direction direction) {
+
+        if(!playerPool.containsKey(playerTempId))
+            return new LocalResponse(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+        if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
+            return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        String roomId = playerRoom.get(playerTempId);
+        Room room = roomPool.get(roomId);
+        ActiveCharacter player = playerPool.get(playerTempId);
+
+        return room.facePlayer(player, direction);
+    }
+
     public void killThread() {
         roomPool.forEach((name, room) -> room.quit());
     }

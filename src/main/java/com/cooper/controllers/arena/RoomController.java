@@ -1,5 +1,6 @@
 package com.cooper.controllers.arena;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +10,7 @@ import com.cooper.container.LocalResponse;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.player.ActivePool;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/pool/character")
 public class RoomController {

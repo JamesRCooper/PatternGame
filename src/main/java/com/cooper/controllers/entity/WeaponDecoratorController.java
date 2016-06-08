@@ -4,6 +4,7 @@
  */
 package com.cooper.controllers.entity;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import com.cooper.controllers.entity.BaseEntityControllerTemplate;
 import com.cooper.data.WeaponDecoratorRepository;
 import com.cooper.entities.WeaponDecoratorEntity;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/entity/weaponDecorator")
 public class WeaponDecoratorController extends BaseEntityControllerTemplate<WeaponDecoratorEntity> {

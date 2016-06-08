@@ -4,12 +4,14 @@
  */
 package com.cooper.controllers.entity;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooper.data.ArmorDecoratorRepository;
 import com.cooper.entities.ArmorDecoratorEntity;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/entity/armorDecorator")
 public class ArmorDecoratorController extends BaseEntityControllerTemplate<ArmorDecoratorEntity> {

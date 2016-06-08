@@ -7,6 +7,7 @@ package com.cooper.controllers.entity;
 import java.util.List;
 
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooper.data.CharacterRepository;
 import com.cooper.entities.CharacterEntity;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/entity/character")
 public class CharacterController {

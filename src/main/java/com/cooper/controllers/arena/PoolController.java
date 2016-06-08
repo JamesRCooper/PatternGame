@@ -2,6 +2,7 @@ package com.cooper.controllers.arena;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import com.cooper.game.player.ActivePlayer;
 import com.cooper.game.player.ActivePool;
 import com.cooper.model.Character;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/pool")
 public class PoolController {

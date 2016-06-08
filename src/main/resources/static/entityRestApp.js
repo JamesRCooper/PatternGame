@@ -1,5 +1,7 @@
 var app = angular.module('entityRestApp', []);
 
+var absoluteAddress = 'jamescooper.privatedns.org:8081';
+
 controllerMethodFactory = function(ctrlDest, ctrlType) {
 
     return function($scope, $http) {

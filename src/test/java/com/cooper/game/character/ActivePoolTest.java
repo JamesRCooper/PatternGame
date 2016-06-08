@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import static com.cooper.creator.enums.LocalErrorType.PLAYER_ALREADY_EXISTS;
-import static com.cooper.creator.enums.LocalErrorType.PLAYER_IS_NOT_IN_POOL;
+import static com.cooper.enums.LocalErrorType.PLAYER_ALREADY_EXISTS;
+import static com.cooper.enums.LocalErrorType.PLAYER_IS_NOT_IN_POOL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.cooper.container.LocalResponse;
-import com.cooper.game.arena.Room;
+import com.cooper.game.pool.Room;
 import com.cooper.game.pool.ActivePool;
 
 @RunWith(SpringJUnit4ClassRunner.class)

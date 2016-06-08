@@ -7,7 +7,7 @@ package com.cooper.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.enums.LocalErrorType;
 
 public class LocalResponse {
 

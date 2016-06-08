@@ -2,13 +2,15 @@
  * Copyright (C) 2016 by Amobee Inc.
  * All Rights Reserved.
  */
-package com.cooper.game.arena;
+package com.cooper.game.pool;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +18,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.enums.LocalErrorType;
+import com.cooper.game.arena.Direction;
+import com.cooper.game.arena.Position;
 import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.interactive.LoadedInteractive;
+import com.cooper.game.interactive.SignInteractive;
 
 public class RoomTest {
 
@@ -24,7 +31,13 @@ public class RoomTest {
 
     @Before
     public void setUp() {
+
         room = new Room("src/test/resources/arena/DUNGEON_TESTING.arena");
+
+        LoadedInteractive block = new LoadedInteractive(
+                new SignInteractive("Test Sign"),
+                new Position(6, 6));
+        room.addBlock(block);
     }
 
     @Test
@@ -73,6 +86,16 @@ public class RoomTest {
     }
 
     @Test
+    public void testBlockPlacement() {
+
+        LoadedInteractive block = new LoadedInteractive(
+                new SignInteractive("Test Sign"),
+                new Position(6, 6));
+        LocalResponse response = room.addBlock(block);
+        assertEquals(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED, response.getErrors().get(0));
+    }
+
+    @Test
     public void testCharacterOverlay() {
 
         ActiveCharacter character1 = getNewCharacter("Martin");
@@ -91,5 +114,23 @@ public class RoomTest {
         ActiveCharacter character = mock(ActiveCharacter.class);
         when(character.getIdentifier()).thenReturn(name);
         return character;
+    }
+
+    @Test
+    public void testHeartbeat() throws Exception {
+
+        List<String> testObserver = new ArrayList<>();
+
+        MockBlock mockBlock = new MockBlock(testObserver);
+        LoadedInteractive loadedBlock = new LoadedInteractive(
+                mockBlock,
+                new Position(5,5));
+
+        room.addBlock(loadedBlock);
+        room.start();
+        Thread.sleep(3000L);
+        room.quit();
+
+        assertTrue(testObserver.size() > 0);
     }
 }

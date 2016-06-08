@@ -6,8 +6,8 @@ package com.cooper.game.arena;
 
 public class Position {
 
-    Integer COLUMN;
-    Integer ROW;
+    public Integer COLUMN;
+    public Integer ROW;
     private Direction facing;
 
     public Position() {

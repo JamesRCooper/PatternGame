@@ -1,4 +1,4 @@
-package com.cooper.creator.enums;
+package com.cooper.enums;
 
 public enum LocalErrorType {
 
@@ -10,10 +10,14 @@ public enum LocalErrorType {
 
     //Room
     PLAYER_NOT_IN_ROOM,
-    PLAYER_CANNOT_OCCUPY_SPACE,
+    SPACE_CANNOT_BE_OCCUPIED,
     ANOTHER_PLAYER_OCCUPIES_SPACE,
     CANNOT_MOVE_UP_OR_DOWN,
 
     //Entities
-    PLAYER_WAS_NOT_BUILT
+    PLAYER_WAS_NOT_BUILT,
+
+    //interactives
+    COMMAND_DOES_NOT_EXIST,
+    SPACE_IS_OCCUPIED_BY_BLOCK;
 }

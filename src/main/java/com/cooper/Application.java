@@ -23,7 +23,7 @@ import com.cooper.creator.data.ArmorRepository;
 import com.cooper.creator.data.CharacterRepository;
 import com.cooper.creator.data.WeaponDecoratorRepository;
 import com.cooper.creator.data.WeaponRepository;
-import com.cooper.game.arena.Room;
+import com.cooper.game.pool.Room;
 import com.cooper.game.pool.ActivePool;
 
 @SpringBootApplication

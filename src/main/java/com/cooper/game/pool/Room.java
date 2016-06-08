@@ -2,7 +2,7 @@
  * Copyright (C) 2016 by Amobee Inc.
  * All Rights Reserved.
  */
-package com.cooper.game.arena;
+package com.cooper.game.pool;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +16,11 @@ import java.util.stream.Collectors;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.creator.dto.RequestedResponse;
-import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.enums.LocalErrorType;
+import com.cooper.game.arena.Direction;
+import com.cooper.game.arena.Position;
 import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.interactive.LoadedInteractive;
 
 public class Room extends Thread {
 
@@ -27,6 +30,7 @@ public class Room extends Thread {
     private final String roomName;
     private final Position startingPosition;
     private Map<ActiveCharacter, Position> activeCharacters;
+    private List<LoadedInteractive> activeBlocks = new ArrayList<>();
 
     private Boolean quit = false;
 
@@ -59,6 +63,21 @@ public class Room extends Thread {
         return roomName;
     }
 
+    public LocalResponse addBlock(LoadedInteractive newBlock) {
+
+        if (isPlayerInSpace(newBlock.getPosition()))
+            return new LocalResponse(LocalErrorType.ANOTHER_PLAYER_OCCUPIES_SPACE);
+        if (!OCCUPIABLE_POSITIONS.contains(map.get(newBlock.getPosition().ROW)
+                .get(newBlock.getPosition().COLUMN)))
+            return new LocalResponse(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED);
+        if (isSpaceBlockedByBlock(newBlock.getPosition())) {
+            return new LocalResponse(LocalErrorType.SPACE_IS_OCCUPIED_BY_BLOCK);
+        }
+
+        activeBlocks.add(newBlock);
+        return new LocalResponse();
+    }
+
     public LocalResponse addPlayer(ActiveCharacter player) {
 
         if (activeCharacters.containsKey(player))
@@ -75,7 +94,10 @@ public class Room extends Thread {
         if (isPlayerInSpace(position))
             return new LocalResponse(LocalErrorType.ANOTHER_PLAYER_OCCUPIES_SPACE);
         if (!OCCUPIABLE_POSITIONS.contains(map.get(position.ROW).get(position.COLUMN)))
-            return new LocalResponse(LocalErrorType.PLAYER_CANNOT_OCCUPY_SPACE);
+            return new LocalResponse(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED);
+        if (isSpaceBlockedByBlock(position)) {
+            return new LocalResponse(LocalErrorType.SPACE_IS_OCCUPIED_BY_BLOCK);
+        }
 
         activeCharacters.put(player, position);
         return new LocalResponse();
@@ -86,6 +108,16 @@ public class Room extends Thread {
                 .stream()
                 .map(position::equals)
                 .reduce(false, (bool1, bool2) -> bool1 || bool2);
+    }
+
+    private Boolean isSpaceBlockedByBlock(Position position) {
+
+        for (LoadedInteractive block : activeBlocks) {
+            if (!block.getBaseInteractive().isOccupiable() && block.getPosition().equals(position)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //TODO: write test
@@ -121,7 +153,7 @@ public class Room extends Thread {
             break;
         }
         if (!isPositionOccupiable(column, row))
-            return new LocalResponse(LocalErrorType.PLAYER_CANNOT_OCCUPY_SPACE);
+            return new LocalResponse(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED);
 
         activeCharacters.replace(player, new Position(column, row, playerPosition.getFacing()));
         return new LocalResponse();
@@ -144,6 +176,7 @@ public class Room extends Thread {
 
         List<List<Character>> overlaidMap = getCopyOfMap();
         insertCharacterTokensIntoMap(overlaidMap);
+        insertBlockTokensIntoMap(overlaidMap);
         return new RequestedResponse<>(convertMapToString(overlaidMap));
     }
 
@@ -160,7 +193,15 @@ public class Room extends Thread {
 
     private void insertCharacterTokensIntoMap(List<List<Character>> overlaidMap) {
 
-        activeCharacters.forEach((c, p) -> overlaidMap.get(p.ROW).set(p.COLUMN, 'U'));
+        activeCharacters.forEach((c, p) ->
+                overlaidMap.get(p.ROW).set(p.COLUMN, 'U'));
+    }
+
+    private void insertBlockTokensIntoMap(List<List<Character>> overlaidMap) {
+
+        activeBlocks.forEach( b ->
+                overlaidMap.get(b.getPosition().ROW)
+                        .set(b.getPosition().COLUMN, b.getBaseInteractive().getIdentifieingMark()));
     }
 
     private List<String> convertMapToString(List<List<Character>> overlayArray) {
@@ -191,11 +232,14 @@ public class Room extends Thread {
     }
 
     private void heartbeat() {
+
         String msg = "Heartbeat: " + getRoomName();
         msg = activeCharacters.keySet()
                 .stream()
                 .map(ActiveCharacter::getIdentifier)
                 .reduce(msg, (m, p) -> "\n" + m + p);
         System.out.println(msg);
+
+        activeBlocks.forEach(li -> li.getBaseInteractive().beatHeart());
     }
 }

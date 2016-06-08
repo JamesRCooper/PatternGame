@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooper.creator.builder.CharacterBuilder;
 import com.cooper.container.LocalResponse;
 import com.cooper.creator.dto.RequestedResponse;
-import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.enums.LocalErrorType;
 import com.cooper.game.character.ActiveCharacter;
 import com.cooper.game.character.ActivePlayer;
 import com.cooper.game.pool.ActivePool;

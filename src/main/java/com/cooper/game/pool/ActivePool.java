@@ -14,9 +14,8 @@ import org.springframework.util.StringUtils;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.creator.dto.RequestedResponse;
-import com.cooper.creator.enums.LocalErrorType;
+import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
-import com.cooper.game.arena.Room;
 import com.cooper.game.character.ActiveCharacter;
 
 public class ActivePool {

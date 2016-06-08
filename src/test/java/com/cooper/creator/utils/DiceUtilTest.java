@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class DiceUtilTest {
 
-    @Test
     public void testD2() {
         testSpecificDie(DiceUtil::xd2_plusy, 1500);
     }

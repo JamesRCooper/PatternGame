@@ -64,7 +64,7 @@ public class PoolController {
     }
 
     @RequestMapping(value = "/map", params = {"activeId"})
-    public RequestedResponse getOverlaidMap(@RequestParam String activeId) {
+    public RequestedResponse<String> getOverlaidMap(@RequestParam String activeId) {
 
         return pool.getPlayerMap(activeId);
     }

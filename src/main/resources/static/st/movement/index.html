@@ -2,28 +2,59 @@
 <head>
     <title>Move your Character</title>
     <style>
-        iframe {
-            height: 300px;
-            width: 150px;
-            resize: horizontal;
+        body {
+            font-family: "Times New Roman", Georgia, Serif;
+        }
+
+        ol {
+            font-family: monospace;
         }
     </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/st/movement/movementApp.js"></script>
 </head>
-    <body>
-    After you move the character, you'll have to refresh the map. Resize the map until the columns line up.
-    <br>
-    I should probably metnion that your character is represented by a 'U'.
-    <br>
-    <form action="" method="get" target="move_response_frame">
-        ID: <input type="text" name="activeId"><br>
-        <input type="submit" value="North" formaction="/pool/character/move/N"><br>
-        <input type="submit" value="West" formaction="/pool/character/move/W">
-        <input type="submit" value="Refesh" formaction="/pool/map" formtarget="map_frame">
-        <input type="submit" value="East" formaction="/pool/character/move/E"><br>
-        <input type="submit" value="South" formaction="/pool/character/move/S"><br>
-    </form>
-    <iframe src="" name="move_response_frame"></iframe>
-    <br><br>
-    <iframe src="" name="map_frame" ></iframe>
+    <body ng-app="movementApp">
+    <div ng-controller="poolController">
+        <b>List of Saved Character</b>
+        <ol>
+            <li ng-repeat = "character in characters">
+                {{ character.name }}
+            </li>
+        </ol>
+        {{ response.data.errors }}<br>
+        Type chosen character here:
+        <input type="text" ng-model="name" value="name">
+        <input type="submit" ng-click="loadCharacter(name)" value="Load">
+        <br>
+        <br>
+        <input type="text" ng-model="playerPoolId"><br>
+        <input list="location" ng-model="location">
+        <input type="submit" ng-click="enterRoom(location)" value="Enter Room">
+        <br>
+        <b>Move</b>
+        <input type="submit" value="North" ng-click="movePlayer('N')"><br>
+        <input type="submit" value="West"  ng-click="movePlayer('W')">
+        <input type="submit" value="East"  ng-click="movePlayer('E')"><br>
+        <input type="submit" value="South" ng-click="movePlayer('S')"><br>
+        <br>
+        <b>Face</b>
+        <input type="submit" value="North" ng-click="facePlayer('N')"><br>
+        <input type="submit" value="West"  ng-click="facePlayer('W')">
+        <input type="submit" value="East"  ng-click="facePlayer('E')"><br>
+        <input type="submit" value="South" ng-click="facePlayer('S')"><br>
+        <br>
+        <ol>
+            <li ng-repeat = "row in mappers">
+                {{ row.row }}<br>
+            </li>
+        </ol>
+        <br>
+        {{ response.data }}
+    </div>
+
+    <datalist id="location">
+        <option value="FARM_1">
+        <option value="DUNGEON_1">
+    </datalist>
     </body>
 </html>

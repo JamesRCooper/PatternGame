@@ -14,12 +14,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.cooper.container.LocalError;
 import com.cooper.container.LocalResponse;
 import com.cooper.creator.dto.RequestedResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.arena.Position;
 import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.interactive.Interactive;
 import com.cooper.game.interactive.LoadedInteractive;
 
 public class Room extends Thread {
@@ -212,6 +215,59 @@ public class Room extends Thread {
             newMpa.add(tmp);
         });
         return newMpa;
+    }
+
+    public InteractiveBlockDTO getBlockCommands(final ActiveCharacter player) {
+
+        try {
+            Position playerPos = activeCharacters.get(player);
+            Interactive block = getBlockPlayerIsFacing(playerPos);
+            return block.getOptions();
+        } catch (LocalError rtEx) {
+            return new InteractiveBlockDTO(rtEx.getErrorType());
+        }
+    }
+
+    public InteractiveBlockDTO runBlockCommand(
+            final ActiveCharacter player, final InteractiveBlockDTO blockDTO) {
+
+        try {
+            Position playerPos = activeCharacters.get(player);
+            Interactive block = getBlockPlayerIsFacing(playerPos);
+            return block.performCommand(blockDTO);
+        } catch (LocalError rtEx) {
+            return new InteractiveBlockDTO(rtEx.getErrorType());
+        }
+    }
+
+    public Interactive getBlockPlayerIsFacing(final Position playerPosition) {
+
+        Position facingSpot = new Position(playerPosition.COLUMN, playerPosition.ROW);
+        switch (playerPosition.getFacing()) {
+        case N:
+            facingSpot.setROW(facingSpot.ROW - 1);
+            break;
+        case E:
+            facingSpot.setCOLUMN(facingSpot.COLUMN + 1);
+            break;
+        case S:
+            facingSpot.setROW(facingSpot.ROW + 1);
+            break;
+        case W:
+            facingSpot.setCOLUMN(facingSpot.COLUMN - 1);
+            break;
+        }
+
+        List<LoadedInteractive> blocks = activeBlocks
+                .stream()
+                .filter(b -> b.getPosition().equals(facingSpot))
+                .collect(Collectors.toList());
+
+        if (blocks.size() == 0) {
+            throw new RuntimeException("Not facing a block");
+        }
+
+        return blocks.get(0).getBaseInteractive();
     }
 
     @Override

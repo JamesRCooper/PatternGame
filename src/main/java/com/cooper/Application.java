@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.cooper.controllers.arena.BlockController;
 import com.cooper.creator.builder.CarryableBuilderFactory;
 import com.cooper.creator.builder.CharacterBuilder;
 import com.cooper.controllers.arena.PoolController;
@@ -23,6 +24,9 @@ import com.cooper.creator.data.ArmorRepository;
 import com.cooper.creator.data.CharacterRepository;
 import com.cooper.creator.data.WeaponDecoratorRepository;
 import com.cooper.creator.data.WeaponRepository;
+import com.cooper.game.arena.Position;
+import com.cooper.game.interactive.LoadedInteractive;
+import com.cooper.game.interactive.SignInteractive;
 import com.cooper.game.pool.Room;
 import com.cooper.game.pool.ActivePool;
 
@@ -104,8 +108,19 @@ public class Application implements CommandLineRunner {
     }
 
     @Bean
+    public BlockController blockController(ActivePool activePool) {
+        return new BlockController(activePool);
+    }
+
+    @Bean
     public Room getDUNGEON_1() {
-        return new Room("src/main/resources/arena/DUNGEON_1.arena");
+
+        Room room = new Room("src/main/resources/arena/DUNGEON_1.arena");
+        room.addBlock(new LoadedInteractive(
+                new SignInteractive("Hello"), new Position(1, 1)));
+        room.addBlock(new LoadedInteractive(
+                new SignInteractive("A Room Lies Behind These Doors"), new Position(11, 6)));
+        return room;
     }
 
     @Bean

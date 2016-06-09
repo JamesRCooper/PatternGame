@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.creator.dto.RequestedResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.character.ActiveCharacter;
@@ -147,6 +148,34 @@ public class ActivePool {
         ActiveCharacter player = playerPool.get(playerTempId);
 
         return room.facePlayer(player, direction);
+    }
+
+    public InteractiveBlockDTO getBlockCommands(final String playerTempId) {
+
+        if(!playerPool.containsKey(playerTempId))
+            return new InteractiveBlockDTO(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+        if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
+            return new InteractiveBlockDTO(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        String roomId = playerRoom.get(playerTempId);
+        Room room = roomPool.get(roomId);
+        ActiveCharacter player = playerPool.get(playerTempId);
+
+        return room.getBlockCommands(player);
+    }
+
+    public InteractiveBlockDTO runBlockCommand(String playerTempId, InteractiveBlockDTO blockDTO) {
+
+        if(!playerPool.containsKey(playerTempId))
+            return new InteractiveBlockDTO(LocalErrorType.PLAYER_IS_NOT_IN_POOL);
+        if(!playerRoom.containsKey(playerTempId) || StringUtils.isEmpty(playerRoom.get(playerTempId)))
+            return new InteractiveBlockDTO(LocalErrorType.PLAYER_NOT_IN_ROOM);
+
+        String roomId = playerRoom.get(playerTempId);
+        Room room = roomPool.get(roomId);
+        ActiveCharacter player = playerPool.get(playerTempId);
+
+        return room.runBlockCommand(player, blockDTO);
     }
 
     public void killThread() {

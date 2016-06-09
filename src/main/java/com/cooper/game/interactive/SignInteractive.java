@@ -4,16 +4,19 @@
  */
 package com.cooper.game.interactive;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
 
 public class SignInteractive implements Interactive {
 
-    private Map<String, Function<String, LocalResponse>> commandMethods;
+    private Map<String, Function<List<String>, InteractiveBlockDTO>> commandMethods;
 
     String signMsg;
 
@@ -41,36 +44,42 @@ public class SignInteractive implements Interactive {
     }
 
     @Override
-    public LocalResponse getOptions() {
+    public InteractiveBlockDTO getOptions() {
 
-        //TODO: Find a way to return an actual list
-        String commands = commandMethods.keySet().toString();
-        return new LocalResponse(commands);
+        List<String> commands = new ArrayList<>(commandMethods.keySet());
+        return new InteractiveBlockDTO(commands);
     }
 
     @Override
-    public LocalResponse performCommand(String cmd, String args) {
+    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
 
-        if(!commandMethods.containsKey(cmd)) {
-            return new LocalResponse(LocalErrorType.COMMAND_DOES_NOT_EXIST);
+        if(blockDTO.getCommands() == null || blockDTO.getCommands().size() == 0)
+            return new InteractiveBlockDTO(LocalErrorType.NO_COMMAND_GIVEN);
+        if(!commandMethods.containsKey(blockDTO.getCommands().get(0))) {
+            return new InteractiveBlockDTO(LocalErrorType.COMMAND_DOES_NOT_EXIST);
         }
 
         return commandMethods
-                .get(cmd)
-                .apply(args);
+                .get(blockDTO.getCommands().get(0))
+                .apply(blockDTO.getCommands());
     }
 
     //Commands
-    private LocalResponse readSign(String args) {
+    private InteractiveBlockDTO readSign(List<String> args) {
 
-        String msg = signMsg;
-        return new LocalResponse(msg);
+        InteractiveBlockDTO dto = new InteractiveBlockDTO();
+        dto.setMessage(signMsg);
+        return dto;
     }
 
-    private LocalResponse writeOnSign(String args) {
+    private InteractiveBlockDTO writeOnSign(List<String> args) {
 
-        this.signMsg = args;
-        return new LocalResponse(args);
+        if(args == null || args.size() ==0)
+            return new InteractiveBlockDTO(LocalErrorType.NO_ARGUMENTS_SUPPLIED);
+        this.signMsg = args.get(0);
+        InteractiveBlockDTO dto = new InteractiveBlockDTO();
+        dto.setMessage(signMsg);
+        return dto;
     }
 
     //heartbeat

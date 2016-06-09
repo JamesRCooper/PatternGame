@@ -1,6 +1,6 @@
 package com.cooper.game.interactive;
 
-import com.cooper.container.LocalResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 
 public interface Interactive {
 
@@ -8,8 +8,8 @@ public interface Interactive {
     Character getIdentifieingMark();
     Boolean isOccupiable();
 
-    LocalResponse getOptions();
-    LocalResponse performCommand(String cmd, String args);
+    InteractiveBlockDTO getOptions();
+    InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO);
 
     void beatHeart();
 }

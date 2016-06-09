@@ -19,5 +19,7 @@ public enum LocalErrorType {
 
     //interactives
     COMMAND_DOES_NOT_EXIST,
-    SPACE_IS_OCCUPIED_BY_BLOCK;
+    SPACE_IS_OCCUPIED_BY_BLOCK,
+    NO_COMMAND_GIVEN,
+    NO_ARGUMENTS_SUPPLIED;
 }

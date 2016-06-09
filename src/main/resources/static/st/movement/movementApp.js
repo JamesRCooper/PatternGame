@@ -16,6 +16,7 @@ app.controller('poolController', function($scope, $http) {
     $scope.enterRoom = function (location) {
         $http.get("/pool/moveToRoom?activeId=" + $scope.playerPoolId + "&roomName=" + location)
             .then(function (response) {
+                $scope.response = response;
             });
     };
 

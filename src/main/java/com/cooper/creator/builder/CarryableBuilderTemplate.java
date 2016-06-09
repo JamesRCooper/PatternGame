@@ -41,6 +41,9 @@ public abstract class CarryableBuilderTemplate<
     private C getBaseCarryable(String entityId) {
 
         E entity = baseRepo.findOne(entityId);
+        if (entity == null ) {
+            throw new RuntimeException("entity, " + entityId + ", not found in db.");
+        }
         return getCarryableFromEntity(entity);
     }
 

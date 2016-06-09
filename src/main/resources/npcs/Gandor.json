@@ -14,7 +14,7 @@
   },
   "offHand": null,
   "armor": {
-    "baseIdentifier": "CHAIN_MAIL",
+    "baseIdentifier": "PLATE_MAIL",
     "decorators": ["SHIMMERING"]
   },
   "bag": []

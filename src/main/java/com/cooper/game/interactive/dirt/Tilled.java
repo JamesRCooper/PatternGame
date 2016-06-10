@@ -13,7 +13,7 @@ public class Tilled implements DirtState {
 
     @Override
     public String getIdentifier() {
-        return "Tilled";
+        return "Tilled Soil";
     }
 
     @Override

@@ -4,11 +4,15 @@
  */
 package com.cooper.game.interactive;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
 
 public class SignInteractiveTest {
@@ -26,15 +30,16 @@ public class SignInteractiveTest {
     @Test
     public void testOptions() {
 
-        LocalResponse response = sign.getOptions();
+        InteractiveBlockDTO response = sign.getOptions();
 
-        Assert.assertEquals(String.format("[%s, %s]", readCmd, writeCmd), response.getMessage());
+        Assert.assertEquals(Arrays.asList(readCmd, writeCmd), response.getCommands());
     }
 
     @Test
     public void testReadSign() {
 
-        LocalResponse response = sign.performCommand(readCmd, "");
+        InteractiveBlockDTO blockDTO = new InteractiveBlockDTO(Collections.singletonList(readCmd));
+        InteractiveBlockDTO response = sign.performCommand(blockDTO);
 
         Assert.assertEquals("Hello", response.getMessage());
     }
@@ -43,8 +48,12 @@ public class SignInteractiveTest {
     public void testWriteSign() {
 
         String testMsg = "test msg";
-        sign.performCommand(writeCmd, testMsg);
-        LocalResponse response = sign.performCommand(readCmd, "");
+        InteractiveBlockDTO blockDTO = new InteractiveBlockDTO(Collections.singletonList(writeCmd));
+        blockDTO.setArguments(Collections.singletonList(testMsg));
+
+        sign.performCommand(blockDTO);
+        blockDTO = new InteractiveBlockDTO(Collections.singletonList(readCmd));
+        InteractiveBlockDTO response = sign.performCommand(blockDTO);
 
         Assert.assertEquals(testMsg, response.getMessage());
     }
@@ -52,7 +61,9 @@ public class SignInteractiveTest {
     @Test
     public void testBadCommand() {
 
-        LocalResponse response = sign.performCommand("hogwash", "");
+
+        InteractiveBlockDTO response = sign.performCommand(
+                new InteractiveBlockDTO(Collections.singletonList("Hogwash command")));
 
         Assert.assertEquals(LocalErrorType.COMMAND_DOES_NOT_EXIST, response.getErrors().get(0));
     }

@@ -14,7 +14,7 @@ public class Sprouts implements DirtState{
 
     @Override
     public String getIdentifier() {
-        return "sprouting";
+        return "Sprouting Saps";
     }
 
     @Override
@@ -53,10 +53,10 @@ public class Sprouts implements DirtState{
 
     private DirtState tick(List<String> args) {
 
-        if (new Integer(args.get(0)) + tendAugment >= 18) {
+        if (new Integer(args.get(0)) + tendAugment >= 18)
             return new Stalk(tendAugment);
-        }
-        tendAugment -= 1;
+        if (tendAugment > 0)
+            tendAugment -= 1;
         return this;
     }
 

@@ -13,7 +13,7 @@ public class Ripe implements DirtState {
 
     @Override
     public String getIdentifier() {
-        return "Ready for Harvest";
+        return "Ready For Harvest";
     }
 
     @Override

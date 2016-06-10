@@ -25,6 +25,7 @@ import com.cooper.creator.data.CharacterRepository;
 import com.cooper.creator.data.WeaponDecoratorRepository;
 import com.cooper.creator.data.WeaponRepository;
 import com.cooper.game.arena.Position;
+import com.cooper.game.interactive.DirtInteractive;
 import com.cooper.game.interactive.LoadedInteractive;
 import com.cooper.game.interactive.SignInteractive;
 import com.cooper.game.pool.Room;
@@ -125,7 +126,17 @@ public class Application implements CommandLineRunner {
 
     @Bean
     public Room getFARM_1() {
-        return new Room("src/main/resources/arena/FARM_1.arena");
+
+        Room farm = new Room("src/main/resources/arena/FARM_1.arena");
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j < 5; j++) {
+                farm.addBlock(new LoadedInteractive(
+                        new DirtInteractive(), new Position(i, j)));
+                farm.addBlock(new LoadedInteractive(
+                        new DirtInteractive(), new Position(i, 10 + j)));
+            }
+        }
+        return farm;
     }
 
     @Bean

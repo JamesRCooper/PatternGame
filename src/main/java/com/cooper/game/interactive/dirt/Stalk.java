@@ -18,7 +18,7 @@ public class Stalk implements DirtState {
 
     @Override
     public String getIdentifier() {
-        return "matured";
+        return "Matured Stalk";
     }
 
     @Override
@@ -57,10 +57,10 @@ public class Stalk implements DirtState {
 
     private DirtState tick(List<String> args) {
 
-        if (new Integer(args.get(0)) + tendAugment >= 18) {
+        if (new Integer(args.get(0)) + tendAugment >= 18)
             return new Ripe();
-        }
-        tendAugment -= 1;
+        if (tendAugment > 0)
+            tendAugment -= 1;
         return this;
     }
 

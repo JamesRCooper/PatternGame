@@ -1,8 +1,10 @@
 package com.cooper.game.pool;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.game.interactive.Interactive;
 
 public class MockBlock implements Interactive{
@@ -25,12 +27,12 @@ public class MockBlock implements Interactive{
         return false;
     }
 
-    @Override public LocalResponse getOptions() {
-        return new LocalResponse("[NONE]");
+    @Override public InteractiveBlockDTO getOptions() {
+        return new InteractiveBlockDTO(Collections.singletonList("NONE"));
     }
 
-    @Override public LocalResponse performCommand(String cmd, String args) {
-        return new LocalResponse(cmd);
+    @Override public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
+        return new InteractiveBlockDTO(Collections.singletonList("NONE"));
     }
 
     @Override

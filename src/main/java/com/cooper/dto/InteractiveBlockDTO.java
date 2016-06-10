@@ -5,6 +5,7 @@
 package com.cooper.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.cooper.enums.LocalErrorType;
@@ -23,6 +24,10 @@ public class InteractiveBlockDTO {
 
     public InteractiveBlockDTO(List<String> commands) {
         this.commands = commands;
+    }
+
+    public InteractiveBlockDTO(String command) {
+        this.commands = Collections.singletonList(command);
     }
 
     public InteractiveBlockDTO(LocalErrorType error) {

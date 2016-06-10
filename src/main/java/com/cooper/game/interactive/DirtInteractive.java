@@ -16,11 +16,14 @@ public class DirtInteractive implements Interactive {
     private Random rndNumGen;
 
     public DirtInteractive() {
+
         this.rndNumGen = new Random();
         this.currentState = new Tilled();
     }
 
     public DirtInteractive(DirtState currentState) {
+
+        this.rndNumGen = new Random();
         this.currentState = currentState;
     }
 

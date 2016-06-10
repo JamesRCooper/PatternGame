@@ -61,7 +61,7 @@ public class SignInteractive implements Interactive {
 
         return commandMethods
                 .get(blockDTO.getCommands().get(0))
-                .apply(blockDTO.getCommands());
+                .apply(blockDTO.getArguments());
     }
 
     //Commands

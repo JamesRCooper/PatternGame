@@ -2,6 +2,14 @@ var app = angular.module('movementApp', []);
 
 app.controller('poolController', function($scope, $http) {
 
+    $scope.options = ["Some", "commands"];
+    $scope.cmdDto = {
+        message: "",
+        commands: [],
+        arguments: [],
+        errors: []
+    };
+
     $http.get("/entity/character/").then(function (response) {
         $scope.characters = response.data;
     });
@@ -49,6 +57,21 @@ app.controller('poolController', function($scope, $http) {
             rowStructs.push(rowStruct);
         }
         $scope.mappers = rowStructs;
-    }
+    };
 
+    $scope.getBlockOptions = function () {
+        $http.get("/pool/block/?activeId=" + $scope.playerPoolId).then(function (response) {
+            $scope.response = response;
+            $scope.options = response.data.commands;
+        });
+    };
+
+    $scope.commandBlock = function (cmd) {
+        $scope.cmdDto.commands = [cmd];
+        $scope.cmdDto.arguments = [$scope.arg1, $scope.arg2];
+        $http.put("/pool/block/?activeId=" + $scope.playerPoolId, $scope.cmdDto).then(function (response) {
+            $scope.interactionResponse = response.data.message;
+            $scope.response = response;
+        });
+    };
 });

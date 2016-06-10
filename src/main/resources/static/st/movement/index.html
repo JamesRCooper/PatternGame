@@ -9,6 +9,25 @@
         ol {
             font-family: monospace;
         }
+        #wrapperDiv {
+            width: 500px;
+            border: 1px;
+            overflow: auto;
+        }
+        #leftDiv {
+            width: 250px;
+            float: left;
+            border: 1px solid red;
+        }
+        #rightDiv {
+            width: 240px;
+            border: 1px solid green;
+            float: left;
+        }
+        #buttons {
+            float: left;
+            margin: 50px;
+        }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="/st/movement/movementApp.js"></script>
@@ -31,25 +50,50 @@
         <input list="location" ng-model="location">
         <input type="submit" ng-click="enterRoom(location)" value="Enter Room">
         <br>
-        <b>Move</b><br>
-        <input type="submit" value="North" ng-click="movePlayer('N')"><br>
-        <input type="submit" value="West"  ng-click="movePlayer('W')">
-        <input type="submit" value="East"  ng-click="movePlayer('E')"><br>
-        <input type="submit" value="South" ng-click="movePlayer('S')"><br>
+
+        <div id="buttons">
+            <b>Move</b><br>
+            <input type="submit" value="North" ng-click="movePlayer('N')"><br>
+            <input type="submit" value="West"  ng-click="movePlayer('W')">
+            <input type="submit" value="East"  ng-click="movePlayer('E')"><br>
+            <input type="submit" value="South" ng-click="movePlayer('S')"><br>
+            <br>
+            <b>Face</b><br>
+            <input type="submit" value="North" ng-click="facePlayer('N')"><br>
+            <input type="submit" value="West"  ng-click="facePlayer('W')">
+            <input type="submit" value="East"  ng-click="facePlayer('E')"><br>
+            <input type="submit" value="South" ng-click="facePlayer('S')"><br>
+        </div>
+        <div id="buttons">
+            <div ng-repeat="option in options">
+                <input type="submit" value="{{ option }}" ng-click="commandBlock(option)">
+            </div>
+            <br>
+            arg1: <input type="text" ng-model="arg1"><br>
+            arg2: <input type="text" ng-model="arg2"><br>
+            <br><br>
+            Interaction Response:<br>
+            {{ interactionResponse }}
+        </div>
         <br>
-        <b>Face</b><br>
-        <input type="submit" value="North" ng-click="facePlayer('N')"><br>
-        <input type="submit" value="West"  ng-click="facePlayer('W')">
-        <input type="submit" value="East"  ng-click="facePlayer('E')"><br>
-        <input type="submit" value="South" ng-click="facePlayer('S')"><br>
+        Some Text
         <br>
-        <ol>
-            <li ng-repeat = "row in mappers">
-                {{ row.row }}<br>
-            </li>
-        </ol>
+        <div id="wrapperDiv">
+            <div id="leftDiv">
+                <ol>
+                    <li ng-repeat = "row in mappers">
+                        {{ row.row }}<br>
+                    </li>
+                </ol>
+            </div>
+            <div id="rightDiv">
+                <input type="submit" value="Interact" ng-click="getBlockOptions()">
+                {{ response.data }}<br><br>
+                {{ cmdDto }}<br>
+            </div>
+        </div>
+
         <br>
-        {{ response.data }}
     </div>
 
     <datalist id="location">

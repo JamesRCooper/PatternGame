@@ -5,7 +5,7 @@ import com.cooper.dto.InteractiveBlockDTO;
 public interface Interactive {
 
     String getIdentifier();
-    Character getIdentifieingMark();
+    Character getIdentifieingToken();
     Boolean isOccupiable();
 
     InteractiveBlockDTO getOptions();

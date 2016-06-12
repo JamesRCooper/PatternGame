@@ -33,7 +33,7 @@ public class DirtInteractive implements Interactive {
     }
 
     @Override
-    public Character getIdentifieingMark() {
+    public Character getIdentifieingToken() {
         return currentState.getIdentifieingMark();
     }
 

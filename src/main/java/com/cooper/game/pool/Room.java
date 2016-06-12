@@ -178,8 +178,8 @@ public class Room extends Thread {
     public RequestedResponse<String> getMap() {
 
         List<List<Character>> overlaidMap = getCopyOfMap();
-        insertCharacterTokensIntoMap(overlaidMap);
         insertBlockTokensIntoMap(overlaidMap);
+        insertCharacterTokensIntoMap(overlaidMap);
         return new RequestedResponse<>(convertMapToString(overlaidMap));
     }
 
@@ -204,7 +204,7 @@ public class Room extends Thread {
 
         activeBlocks.forEach( b ->
                 overlaidMap.get(b.getPosition().ROW)
-                        .set(b.getPosition().COLUMN, b.getBaseInteractive().getIdentifieingMark()));
+                        .set(b.getPosition().COLUMN, b.getBaseInteractive().getIdentifieingToken()));
     }
 
     private List<String> convertMapToString(List<List<Character>> overlayArray) {
@@ -288,14 +288,6 @@ public class Room extends Thread {
     }
 
     private void heartbeat() {
-
-        String msg = "Heartbeat: " + getRoomName();
-        msg = activeCharacters.keySet()
-                .stream()
-                .map(ActiveCharacter::getIdentifier)
-                .reduce(msg, (m, p) -> "\n" + m + p);
-        System.out.println(msg);
-
         activeBlocks.forEach(li -> li.getBaseInteractive().beatHeart());
     }
 }

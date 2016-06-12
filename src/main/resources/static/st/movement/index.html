@@ -28,6 +28,10 @@
             float: left;
             margin: 50px;
         }
+        #buttons2 {
+            float: left;
+            margin: 50px;
+        }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="/st/movement/movementApp.js"></script>
@@ -64,7 +68,7 @@
             <input type="submit" value="East"  ng-click="facePlayer('E')"><br>
             <input type="submit" value="South" ng-click="facePlayer('S')"><br>
         </div>
-        <div id="buttons">
+        <div id="buttons2">
             <input type="submit" value="Interact" ng-click="getBlockOptions()">
             <br><br>
             <div ng-repeat="option in options">

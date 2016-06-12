@@ -34,8 +34,8 @@ public class SignInteractive implements Interactive {
     }
 
     @Override
-    public Character getIdentifieingMark() {
-        return 'S';
+    public Character getIdentifieingToken() {
+        return 'P';
     }
 
     @Override

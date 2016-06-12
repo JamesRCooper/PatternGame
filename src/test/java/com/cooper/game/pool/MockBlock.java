@@ -19,7 +19,7 @@ public class MockBlock implements Interactive{
         return "mockBlockl";
     }
 
-    @Override public Character getIdentifieingMark() {
+    @Override public Character getIdentifieingToken() {
         return 'm';
     }
 

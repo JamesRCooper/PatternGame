@@ -129,8 +129,14 @@ public class Room extends Thread {
         if (!activeCharacters.containsKey(player))
             return new LocalResponse(LocalErrorType.PLAYER_NOT_IN_ROOM);
 
-        activeCharacters.get(player).setFacing(direction);
-        return new LocalResponse();
+        Position playerPosition = activeCharacters.get(player);
+        playerPosition.setFacing(direction);
+        try {
+            Interactive blockInFrontOfPlayer = getBlockPlayerIsFacing(playerPosition);
+            return new LocalResponse("Facing " + blockInFrontOfPlayer.getIdentifier());
+        } catch (LocalError le) {
+            return new LocalResponse();
+        }
     }
 
     public LocalResponse movePlayer(ActiveCharacter player, Direction direction) {
@@ -158,8 +164,14 @@ public class Room extends Thread {
         if (!isPositionOccupiable(column, row))
             return new LocalResponse(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED);
 
-        activeCharacters.replace(player, new Position(column, row, playerPosition.getFacing()));
-        return new LocalResponse();
+        Position newPosition = new Position(column, row, playerPosition.getFacing());
+        activeCharacters.replace(player, newPosition);
+        try {
+            Interactive blockInFrontOfPlayer = getBlockPlayerIsFacing(newPosition);
+            return new LocalResponse("Facing " + blockInFrontOfPlayer.getIdentifier());
+        } catch (LocalError le) {
+            return new LocalResponse();
+        }
     }
 
     private boolean isPositionOccupiable(Integer column, Integer row) {
@@ -264,7 +276,7 @@ public class Room extends Thread {
                 .collect(Collectors.toList());
 
         if (blocks.size() == 0) {
-            throw new RuntimeException("Not facing a block");
+            throw new LocalError("Not facing a block", LocalErrorType.NO_INTERACTIVE_BLOCKS_IN_SPACE);
         }
 
         return blocks.get(0).getBaseInteractive();

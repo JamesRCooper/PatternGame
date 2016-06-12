@@ -140,6 +140,12 @@ public class Application implements CommandLineRunner {
     }
 
     @Bean
+    public Room getTOWN_1() {
+
+        return new Room("src/main/resources/arena/TOWN_1.arena");
+    }
+
+    @Bean
     public ActivePool getActivePool(Room[] roomCollection) {
         List<Room> rooms = Arrays.asList(roomCollection);
         return new ActivePool(rooms);

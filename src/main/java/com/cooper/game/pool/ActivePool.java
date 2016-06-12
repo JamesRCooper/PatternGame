@@ -97,8 +97,10 @@ public class ActivePool {
         return new LocalResponse();
     }
 
-    public List<String> getListOfRooms() {
-        return new ArrayList<>(roomPool.keySet());
+    public RequestedResponse<String> getListOfRooms() {
+
+        List<String> rooms = new ArrayList<>(roomPool.keySet());
+        return new RequestedResponse<>(rooms);
     }
 
     public List<ActiveCharacter> getListOfPlayers() {

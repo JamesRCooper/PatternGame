@@ -14,6 +14,10 @@ app.controller('poolController', function($scope, $http) {
         $scope.characters = response.data;
     });
 
+    $http.get("/pool/rooms").then(function (response) {
+        $scope.rooms = response.data.objects;
+    });
+
     $scope.loadCharacter = function (characterName) {
         $http.get("/pool/place?characterName=" + characterName).then(function (response) {
             $scope.response = response;

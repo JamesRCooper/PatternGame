@@ -32,12 +32,6 @@ public class PoolController {
         this.pool = pool;
     }
 
-    @RequestMapping("/rooms")
-    public List<String> listRooms() {
-
-        return pool.getListOfRooms();
-    }
-
     @RequestMapping("/players")
     public List<ActiveCharacter> listPlayers() {
 
@@ -67,6 +61,12 @@ public class PoolController {
     public RequestedResponse<String> getOverlaidMap(@RequestParam String activeId) {
 
         return pool.getPlayerMap(activeId);
+    }
+
+    @RequestMapping(value = "/rooms")
+    public RequestedResponse<String> getListOfActiveRooms() {
+
+        return pool.getListOfRooms();
     }
 
     @RequestMapping(value = "/map/key")

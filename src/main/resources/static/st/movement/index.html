@@ -99,12 +99,9 @@
             </div>
         </div>
 
-        <br>
+        <datalist id="location">
+            <option ng-repeat="room in rooms" value="{{ room }}">
+        </datalist>
     </div>
-
-    <datalist id="location">
-        <option value="FARM_1">
-        <option value="DUNGEON_1">
-    </datalist>
     </body>
 </html>

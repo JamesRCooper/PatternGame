@@ -48,7 +48,7 @@ public class DiceUtilTest {
     public void testOffset() {
         Integer total = DiceUtil.xd2_plusy(1, 100);
         assert total > 100;
-        assert total < 102;
+        assert total <= 102;
     }
 
     private void testSpecificDie(BiFunction<Integer, Integer, Integer> diceFunction, Integer bestGuess) {

@@ -1,10 +1,12 @@
 package com.cooper.misc;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ThreadTesting {
 
     @Test
+    @Ignore
     public void testThreadStuff() throws InterruptedException {
 
         TestThread t = new TestThread();

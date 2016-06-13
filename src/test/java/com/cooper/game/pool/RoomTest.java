@@ -22,6 +22,7 @@ import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.arena.Position;
 import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.interactive.InteractiveFactory;
 import com.cooper.game.interactive.LoadedInteractive;
 import com.cooper.game.interactive.SignInteractive;
 
@@ -32,7 +33,8 @@ public class RoomTest {
     @Before
     public void setUp() {
 
-        room = new Room("src/test/resources/arena/DUNGEON_TESTING.arena");
+        RoomBuilder builder = new RoomBuilder(new InteractiveFactory());
+        room = builder.buildRoomFromSource("src/test/resources/arena/DUNGEON_TESTING.arena");
 
         LoadedInteractive block = new LoadedInteractive(
                 new SignInteractive("Test Sign"),
@@ -92,7 +94,7 @@ public class RoomTest {
                 new SignInteractive("Test Sign"),
                 new Position(6, 6));
         LocalResponse response = room.addBlock(block);
-        assertEquals(LocalErrorType.SPACE_CANNOT_BE_OCCUPIED, response.getErrors().get(0));
+        assertEquals(LocalErrorType.SPACE_IS_OCCUPIED_BY_BLOCK, response.getErrors().get(0));
     }
 
     @Test

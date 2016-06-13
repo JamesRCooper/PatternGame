@@ -33,33 +33,22 @@ public class Room extends Thread {
     private final String roomName;
     private final Position startingPosition;
     private Map<ActiveCharacter, Position> activeCharacters;
-    private List<LoadedInteractive> activeBlocks = new ArrayList<>();
+    private List<LoadedInteractive> activeBlocks;
 
     private Boolean quit = false;
 
-    public Room(String fileDirectory) {
+    public Room(
+            List<List<Character>> layout,
+            String roomName,
+            Position startingPosition,
+            List<LoadedInteractive> activeBlocks) {
 
-        try {
+        this.map = layout;
+        this.roomName = roomName;
+        this.startingPosition = startingPosition;
+        this.activeBlocks = activeBlocks;
 
-            this.activeCharacters = new HashMap<>();
-            List<String> rows = Files.readAllLines(new File(fileDirectory).toPath());
-            String[] header = rows.remove(0).split(",");
-            roomName = header[0];
-            startingPosition = new Position(new Integer(header[2]), new Integer(header[1]));
-            this.map =  getCharactersFromRows(rows);
-        } catch (IOException ioEx) {
-            throw new RuntimeException("Arena didn't load", ioEx);
-        }
-    }
-
-    private List<List<Character>> getCharactersFromRows(List<String> rows) {
-
-        return rows.stream().map(row -> {
-                    List<Character> charRow = new ArrayList<>();
-                    for (char c : row.toCharArray())
-                        charRow.add(c);
-                    return charRow;
-                }).collect(Collectors.toList());
+        activeCharacters = new HashMap<>();
     }
 
     public String getRoomName() {

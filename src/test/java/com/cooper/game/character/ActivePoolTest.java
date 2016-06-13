@@ -21,8 +21,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.game.interactive.InteractiveFactory;
 import com.cooper.game.pool.Room;
 import com.cooper.game.pool.ActivePool;
+import com.cooper.game.pool.RoomBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
@@ -33,12 +35,14 @@ public class ActivePoolTest {
 
         @Bean
         public Room getTestFarm() {
-            return new Room("src/test/resources/arena/FARM_TESTING.arena");
+            RoomBuilder builder = new RoomBuilder(new InteractiveFactory());
+            return builder.buildRoomFromSource("src/test/resources/arena/FARM_TESTING.arena");
         }
 
         @Bean
         public Room getTestRoom() {
-            return new Room("src/test/resources/arena/DUNGEON_TESTING.arena");
+            RoomBuilder builder = new RoomBuilder(new InteractiveFactory());
+            return builder.buildRoomFromSource("src/test/resources/arena/DUNGEON_TESTING.arena");
         }
 
         @Bean
@@ -55,7 +59,7 @@ public class ActivePoolTest {
     @Test
     public void testRoomPool() {
 
-        List<String> roomNames = activePool.getListOfRooms();
+        List<String> roomNames = activePool.getListOfRooms().getObjects();
         assertTrue(roomNames.contains("DUNGEON_TESTING"));
         assertTrue(roomNames.contains("FARM_TESTING"));
     }

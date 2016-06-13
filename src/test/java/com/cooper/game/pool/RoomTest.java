@@ -6,7 +6,9 @@ package com.cooper.game.pool;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -18,10 +20,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cooper.container.LocalResponse;
+import com.cooper.creator.enums.CarryableType;
+import com.cooper.creator.model.Carryable;
+import com.cooper.creator.model.WeaponBase;
+import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
 import com.cooper.game.arena.Direction;
 import com.cooper.game.arena.Position;
 import com.cooper.game.character.ActiveCharacter;
+import com.cooper.game.character.InventoryExchanger;
+import com.cooper.game.interactive.Interactive;
 import com.cooper.game.interactive.InteractiveFactory;
 import com.cooper.game.interactive.LoadedInteractive;
 import com.cooper.game.interactive.SignInteractive;
@@ -134,5 +142,55 @@ public class RoomTest {
         room.quit();
 
         assertTrue(testObserver.size() > 0);
+    }
+
+    @Test
+    public void testInventoryExchangerPass() {
+
+        ActiveCharacter player = getMockActiveCharacterWithInventory();
+        room.addPlayer(player, new Position(8, 3));
+        Interactive block = getMockBlock();
+        room.addBlock(new LoadedInteractive(block, new Position(8, 2)));
+
+        InteractiveBlockDTO dto =
+                room.getBlockCommands(player);
+        assertEquals("example carryable", dto.getCommands().get(0));
+    }
+
+    public ActiveCharacter getMockActiveCharacterWithInventory() {
+
+        ActiveCharacter character = mock(ActiveCharacter.class);
+        InventoryExchanger mockExchanger = getMockInventoryExchanger();
+        when(character.getInvenoryExchanger()).thenReturn(mockExchanger);
+        when(character.getIdentifier()).thenReturn("example character");
+        return character;
+    }
+
+    public InventoryExchanger getMockInventoryExchanger() {
+
+        Carryable mockCarryable = getMockCarryable();
+        return new InventoryExchanger(
+                () -> mockCarryable,
+                mockCarryable,
+                p -> {});
+    }
+
+    public Carryable getMockCarryable() {
+
+        Carryable carryable = mock(Carryable.class);
+        when(carryable.getType()).thenReturn(CarryableType.WEAPON);
+        when(carryable.getIdentifier()).thenReturn("example carryable");
+        return carryable;
+    }
+
+    public Interactive getMockBlock() {
+
+        Interactive block = mock(Interactive.class);
+        when(block.getOptions(any(InventoryExchanger.class))).thenAnswer(p -> {
+            InventoryExchanger exchanger = p.getArgumentAt(0, InventoryExchanger.class);
+            assertNotNull(exchanger);
+            return new InteractiveBlockDTO(exchanger.lookAt().getIdentifier());
+        });
+        return block;
     }
 }

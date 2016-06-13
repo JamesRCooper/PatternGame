@@ -4,6 +4,8 @@
  */
 package com.cooper.creator.model;
 
+import com.cooper.creator.enums.CarryableType;
+
 public interface Armor extends Carryable {
 
     Integer getAC();
@@ -13,5 +15,10 @@ public interface Armor extends Carryable {
 
     default String getIdentifier() {
         return getName() + " " + getACString();
+    }
+
+    @Override
+    default CarryableType getType() {
+        return CarryableType.ARMOR;
     }
 }

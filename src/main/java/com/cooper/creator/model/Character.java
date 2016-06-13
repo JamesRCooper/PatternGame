@@ -7,4 +7,6 @@ package com.cooper.creator.model;
 public interface Character extends Model {
 
     String getName();
+
+    Carryable getMainHand();
 }

@@ -6,6 +6,7 @@ import java.util.Random;
 import com.cooper.container.LocalError;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 import com.cooper.game.interactive.dirt.DirtState;
 import com.cooper.game.interactive.dirt.Tilled;
 
@@ -43,7 +44,7 @@ public class DirtInteractive implements Interactive {
     }
 
     @Override
-    public InteractiveBlockDTO getOptions() {
+    public InteractiveBlockDTO getOptions(InventoryExchanger exchanger) {
         return currentState.getOptions();
     }
 

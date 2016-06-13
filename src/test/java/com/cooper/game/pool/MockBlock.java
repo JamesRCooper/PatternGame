@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cooper.container.LocalResponse;
 import com.cooper.dto.InteractiveBlockDTO;
+import com.cooper.game.character.InventoryExchanger;
 import com.cooper.game.interactive.Interactive;
 
 public class MockBlock implements Interactive{
@@ -15,23 +16,28 @@ public class MockBlock implements Interactive{
         this.testString = testString;
     }
 
-    @Override public String getIdentifier() {
+    @Override
+    public String getIdentifier() {
         return "mockBlockl";
     }
 
-    @Override public Character getIdentifieingToken() {
+    @Override
+    public Character getIdentifieingToken() {
         return 'm';
     }
 
-    @Override public Boolean isOccupiable() {
+    @Override
+    public Boolean isOccupiable() {
         return false;
     }
 
-    @Override public InteractiveBlockDTO getOptions() {
+    @Override
+    public InteractiveBlockDTO getOptions(InventoryExchanger exchanger) {
         return new InteractiveBlockDTO(Collections.singletonList("NONE"));
     }
 
-    @Override public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
+    @Override
+    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
         return new InteractiveBlockDTO(Collections.singletonList("NONE"));
     }
 

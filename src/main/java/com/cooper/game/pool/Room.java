@@ -4,9 +4,6 @@
  */
 package com.cooper.game.pool;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -223,14 +220,15 @@ public class Room extends Thread {
         try {
             Position playerPos = activeCharacters.get(player);
             Interactive block = getBlockPlayerIsFacing(playerPos);
-            return block.getOptions();
+            return block.getOptions(player.getInvenoryExchanger());
         } catch (LocalError rtEx) {
             return new InteractiveBlockDTO(rtEx.getErrorType());
         }
     }
 
     public InteractiveBlockDTO runBlockCommand(
-            final ActiveCharacter player, final InteractiveBlockDTO blockDTO) {
+            final ActiveCharacter player,
+            final InteractiveBlockDTO blockDTO) {
 
         try {
             Position playerPos = activeCharacters.get(player);

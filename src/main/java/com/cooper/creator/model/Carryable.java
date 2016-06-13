@@ -4,5 +4,9 @@
  */
 package com.cooper.creator.model;
 
+import com.cooper.creator.enums.CarryableType;
+
 public interface Carryable extends Model {
+
+    CarryableType getType();
 }

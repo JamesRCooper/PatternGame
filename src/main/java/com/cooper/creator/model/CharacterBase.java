@@ -98,4 +98,9 @@ public class CharacterBase implements Character {
                 offHand == null ? "nothing" : offHand.getName(),
                 armor == null ? "nothing" : armor.getName());
     }
+
+    @Override
+    public Carryable getMainHand() {
+        return mainHand;
+    }
 }

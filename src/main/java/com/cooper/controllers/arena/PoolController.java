@@ -88,7 +88,7 @@ public class PoolController {
                 .append("m - \n")
                 .append("n - \n")
                 .append("o - \n")
-                .append("p - \n")
+                .append("p - practive dummy\n")
                 .append("q - \n")
                 .append("r - \n")
                 .append("s - soil with crop sprouts\n")

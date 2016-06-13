@@ -30,7 +30,7 @@ public class SignInteractiveTest {
     @Test
     public void testOptions() {
 
-        InteractiveBlockDTO response = sign.getOptions();
+        InteractiveBlockDTO response = sign.getOptions(null);
 
         Assert.assertEquals(Arrays.asList(readCmd, writeCmd), response.getCommands());
     }

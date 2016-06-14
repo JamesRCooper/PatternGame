@@ -233,7 +233,7 @@ public class Room extends Thread {
         try {
             Position playerPos = activeCharacters.get(player);
             Interactive block = getBlockPlayerIsFacing(playerPos);
-            return block.performCommand(blockDTO);
+            return block.performCommand(blockDTO, player.getInvenoryExchanger());
         } catch (LocalError rtEx) {
             return new InteractiveBlockDTO(rtEx.getErrorType());
         }

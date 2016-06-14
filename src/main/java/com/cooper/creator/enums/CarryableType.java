@@ -5,7 +5,12 @@ public enum CarryableType {
     WEAPON("weapon"),
     WEAPON_DECORATOR("weaponDecorator"),
     ARMOR("armor"),
-    ARMOR_DECORATOR("armorDecorator");
+    ARMOR_DECORATOR("armorDecorator"),
+
+    FRUIT("fruit"),
+
+    //Used for block ticks
+    INTANGIBLE_TICK("intangibleTick");
 
     private String value;
 

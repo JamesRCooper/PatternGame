@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.cooper.container.LocalError;
+import com.cooper.creator.model.Fruit;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 
 public class Ripe implements DirtState {
 
@@ -32,7 +34,7 @@ public class Ripe implements DirtState {
     }
 
     @Override
-    public DirtState performCommandForNewState(InteractiveBlockDTO blockDTO) {
+    public DirtState performCommandForNewState(InteractiveBlockDTO blockDTO, InventoryExchanger exchanger) {
 
         switch(blockDTO.getCommands().get(0)) {
         case ("TICK"):
@@ -40,6 +42,7 @@ public class Ripe implements DirtState {
         case ("DIG_UP_HARVESTABLE"):
             return digUp(blockDTO.getArguments());
         case ("HARVEST"):
+            exchanger.placeInInventory(new Fruit("blackberry"));
             return harvest(blockDTO.getArguments());
         }
 
@@ -52,7 +55,6 @@ public class Ripe implements DirtState {
 
     private DirtState harvest(List<String> args) {
 
-        //TODO: figure out way to return object(seeds and fruit) to player
         return new Tilled();
     }
 }

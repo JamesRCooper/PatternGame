@@ -37,7 +37,7 @@ public class MockBlock implements Interactive{
     }
 
     @Override
-    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
+    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO, InventoryExchanger exchanger) {
         return new InteractiveBlockDTO(Collections.singletonList("NONE"));
     }
 

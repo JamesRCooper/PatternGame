@@ -27,6 +27,7 @@ public class InteractiveFactory {
             }
             throw new RuntimeException("Dirt could not be initialized with state: " + state);
         });
+        interactiveCreatorLookup.put("DUMMY", s -> new PracticeDummyInteractive());
     }
 
     public Supplier<Interactive> getInteractiveFromMetaRow(String name, String argument) {

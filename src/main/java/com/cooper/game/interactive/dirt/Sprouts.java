@@ -6,6 +6,7 @@ import java.util.List;
 import com.cooper.container.LocalError;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 
 public class Sprouts implements DirtState{
 
@@ -33,7 +34,7 @@ public class Sprouts implements DirtState{
     }
 
     @Override
-    public DirtState performCommandForNewState(InteractiveBlockDTO blockDTO) {
+    public DirtState performCommandForNewState(InteractiveBlockDTO blockDTO, InventoryExchanger exchanger) {
 
         switch(blockDTO.getCommands().get(0)) {
         case ("TICK"):

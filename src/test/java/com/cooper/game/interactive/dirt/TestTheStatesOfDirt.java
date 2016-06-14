@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.cooper.container.LocalError;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 
 public class TestTheStatesOfDirt {
 
@@ -20,6 +21,8 @@ public class TestTheStatesOfDirt {
     private DirtState sprouts;
     private DirtState stalk;
     private DirtState ripe;
+
+    private InventoryExchanger exchanger = InventoryExchanger.getTickInventory();
 
     @Before
     public void setUp() {
@@ -35,9 +38,11 @@ public class TestTheStatesOfDirt {
 
         assertEquals(Collections.singletonList("PLANT_SEEDS"), tilled.getOptions().getCommands());
 
-        assertTrue(tilled.performCommandForNewState(new InteractiveBlockDTO("TICK")).getClass()
+        assertTrue(tilled.performCommandForNewState(
+                new InteractiveBlockDTO("TICK"), exchanger).getClass()
                 .isInstance(tilled));
-        assertTrue(tilled.performCommandForNewState(new InteractiveBlockDTO("PLANT_SEEDS")).getClass()
+        assertTrue(tilled.performCommandForNewState(
+                new InteractiveBlockDTO("PLANT_SEEDS"), exchanger).getClass()
                 .isInstance(sprouts));
     }
 
@@ -48,7 +53,8 @@ public class TestTheStatesOfDirt {
 
         assertEquals(
                 "Tilled Soil",
-                sprouts.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_SPROUT")).getIdentifier());
+                sprouts.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_SPROUT"), exchanger)
+                        .getIdentifier());
     }
 
     @Test
@@ -56,18 +62,21 @@ public class TestTheStatesOfDirt {
 
         InteractiveBlockDTO blockDTO = new InteractiveBlockDTO("TICK");
         blockDTO.setArguments(Collections.singletonList("18"));
-        assertEquals("Matured Stalk", sprouts.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Matured Stalk", sprouts.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
 
         blockDTO.setArguments(Collections.singletonList("17"));
-        assertEquals("Sprouting Saps", sprouts.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Sprouting Saps", sprouts.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
 
-        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"));
-        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"));
-        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"));
+        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"), exchanger);
+        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"), exchanger);
+        sprouts = sprouts.performCommandForNewState(new InteractiveBlockDTO("TEND"), exchanger);
 
         blockDTO = new InteractiveBlockDTO("TICK");
         blockDTO.setArguments(Collections.singletonList("15"));
-        assertEquals("Matured Stalk", sprouts.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Matured Stalk", sprouts.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
     }
 
     @Test
@@ -77,7 +86,8 @@ public class TestTheStatesOfDirt {
 
         assertEquals(
                 "Tilled Soil",
-                sprouts.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_SPROUT")).getIdentifier());
+                sprouts.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_SPROUT"), exchanger)
+                        .getIdentifier());
     }
 
     @Test
@@ -86,18 +96,22 @@ public class TestTheStatesOfDirt {
         InteractiveBlockDTO blockDTO = new InteractiveBlockDTO("TICK");
 
         blockDTO.setArguments(Collections.singletonList("16"));
-        assertEquals("Ready For Harvest", stalk.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Ready For Harvest", stalk.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
 
         blockDTO.setArguments(Collections.singletonList("15"));
-        assertEquals("Matured Stalk", stalk.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Matured Stalk", stalk.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
 
-        stalk = stalk.performCommandForNewState(new InteractiveBlockDTO("TEND"));
+        stalk = stalk.performCommandForNewState(new InteractiveBlockDTO("TEND"), exchanger);
 
         blockDTO.setArguments(Collections.singletonList("14"));
-        assertEquals("Matured Stalk", stalk.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Matured Stalk", stalk.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
 
         blockDTO.setArguments(Collections.singletonList("17"));
-        assertEquals("Ready For Harvest", stalk.performCommandForNewState(blockDTO).getIdentifier());
+        assertEquals("Ready For Harvest", stalk.performCommandForNewState(blockDTO, exchanger)
+                .getIdentifier());
     }
 
     @Test
@@ -110,7 +124,7 @@ public class TestTheStatesOfDirt {
     public void testRipeBadCommand() {
 
         try {
-            ripe.performCommandForNewState(new InteractiveBlockDTO("Hogwash command"));
+            ripe.performCommandForNewState(new InteractiveBlockDTO("Hogwash command"), exchanger);
             fail("Exception not caught");
         } catch (LocalError le) {
             assertEquals(LocalErrorType.COMMAND_DOES_NOT_EXIST, le.getErrorType());
@@ -122,7 +136,7 @@ public class TestTheStatesOfDirt {
 
         assertEquals(
                 "Ready For Harvest",
-                ripe.performCommandForNewState(new InteractiveBlockDTO("TICK")).getIdentifier());
+                ripe.performCommandForNewState(new InteractiveBlockDTO("TICK"), exchanger).getIdentifier());
     }
 
     @Test
@@ -130,7 +144,8 @@ public class TestTheStatesOfDirt {
 
         assertEquals(
                 "Tilled Soil",
-                ripe.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_HARVESTABLE")).getIdentifier());
+                ripe.performCommandForNewState(new InteractiveBlockDTO("DIG_UP_HARVESTABLE"), exchanger)
+                        .getIdentifier());
     }
 
     @Test
@@ -138,6 +153,7 @@ public class TestTheStatesOfDirt {
 
         assertEquals(
                 "Tilled Soil",
-                ripe.performCommandForNewState(new InteractiveBlockDTO("HARVEST")).getIdentifier());
+                ripe.performCommandForNewState(new InteractiveBlockDTO("HARVEST"), exchanger)
+                        .getIdentifier());
     }
 }

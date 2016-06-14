@@ -10,7 +10,7 @@ public interface Interactive {
     Boolean isOccupiable();
 
     InteractiveBlockDTO getOptions(InventoryExchanger exchanger);
-    InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO);
+    InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO, InventoryExchanger exchanger);
 
     void beatHeart();
 }

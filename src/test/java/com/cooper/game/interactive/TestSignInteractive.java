@@ -14,13 +14,16 @@ import org.junit.Test;
 import com.cooper.container.LocalResponse;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 
-public class SignInteractiveTest {
+public class TestSignInteractive {
 
     private SignInteractive sign;
 
     private String readCmd = "READ_SIGN";
     private String writeCmd = "WRITE_ON_SIGN";
+
+    private InventoryExchanger exchanger = InventoryExchanger.getTickInventory();
 
     @Before
     public void setUp() {
@@ -39,7 +42,7 @@ public class SignInteractiveTest {
     public void testReadSign() {
 
         InteractiveBlockDTO blockDTO = new InteractiveBlockDTO(Collections.singletonList(readCmd));
-        InteractiveBlockDTO response = sign.performCommand(blockDTO);
+        InteractiveBlockDTO response = sign.performCommand(blockDTO, exchanger);
 
         Assert.assertEquals("Hello", response.getMessage());
     }
@@ -51,9 +54,9 @@ public class SignInteractiveTest {
         InteractiveBlockDTO blockDTO = new InteractiveBlockDTO(Collections.singletonList(writeCmd));
         blockDTO.setArguments(Collections.singletonList(testMsg));
 
-        sign.performCommand(blockDTO);
+        sign.performCommand(blockDTO, exchanger);
         blockDTO = new InteractiveBlockDTO(Collections.singletonList(readCmd));
-        InteractiveBlockDTO response = sign.performCommand(blockDTO);
+        InteractiveBlockDTO response = sign.performCommand(blockDTO, exchanger);
 
         Assert.assertEquals(testMsg, response.getMessage());
     }
@@ -63,7 +66,7 @@ public class SignInteractiveTest {
 
 
         InteractiveBlockDTO response = sign.performCommand(
-                new InteractiveBlockDTO(Collections.singletonList("Hogwash command")));
+                new InteractiveBlockDTO(Collections.singletonList("Hogwash command")), exchanger);
 
         Assert.assertEquals(LocalErrorType.COMMAND_DOES_NOT_EXIST, response.getErrors().get(0));
     }

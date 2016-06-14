@@ -36,7 +36,7 @@ public class SignInteractive implements Interactive {
 
     @Override
     public Character getIdentifieingToken() {
-        return 'p';
+        return 'P';
     }
 
     @Override
@@ -52,7 +52,9 @@ public class SignInteractive implements Interactive {
     }
 
     @Override
-    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
+    public InteractiveBlockDTO performCommand(
+            InteractiveBlockDTO blockDTO,
+            InventoryExchanger exchanger) {
 
         if(blockDTO.getCommands() == null || blockDTO.getCommands().size() == 0)
             return new InteractiveBlockDTO(LocalErrorType.NO_COMMAND_GIVEN);

@@ -7,7 +7,7 @@ F_FFFF_________F
 F______________F
 F_____P________F
 F______________F
-F______________F
+F_____________pF
 F_FFFF_________F
 FttttF_________F
 FttttF_________F
@@ -18,3 +18,4 @@ META-INFO
 FARM_1,1,10
 t-DIRT(Tilled)
 P-SIGN(Welcome to my farm)
+p-DUMMY(null)

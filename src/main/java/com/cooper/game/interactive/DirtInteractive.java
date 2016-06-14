@@ -49,7 +49,9 @@ public class DirtInteractive implements Interactive {
     }
 
     @Override
-    public InteractiveBlockDTO performCommand(InteractiveBlockDTO blockDTO) {
+    public InteractiveBlockDTO performCommand(
+            InteractiveBlockDTO blockDTO,
+            InventoryExchanger exchanger) {
 
         if (blockDTO.getCommands() == null || blockDTO.getCommands().size() == 0) {
             return new InteractiveBlockDTO(LocalErrorType.NO_COMMAND_GIVEN);
@@ -60,7 +62,7 @@ public class DirtInteractive implements Interactive {
         }
 
         try {
-            currentState = currentState.performCommandForNewState(blockDTO);
+            currentState = currentState.performCommandForNewState(blockDTO, exchanger);
             return new InteractiveBlockDTO(blockDTO.getCommands());
         } catch (LocalError le) {
             InteractiveBlockDTO dto = new InteractiveBlockDTO(le.getErrorType());
@@ -75,6 +77,6 @@ public class DirtInteractive implements Interactive {
         Integer rndNum = rndNumGen.nextInt(20);
         InteractiveBlockDTO dto = new InteractiveBlockDTO(Collections.singletonList("TICK"));
         dto.setArguments(Collections.singletonList(rndNum.toString()));
-        currentState = currentState.performCommandForNewState(dto);
+        currentState = currentState.performCommandForNewState(dto, InventoryExchanger.getTickInventory());
     }
 }

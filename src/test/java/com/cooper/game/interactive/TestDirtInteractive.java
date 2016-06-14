@@ -11,12 +11,15 @@ import org.junit.Test;
 import com.cooper.container.LocalError;
 import com.cooper.dto.InteractiveBlockDTO;
 import com.cooper.enums.LocalErrorType;
+import com.cooper.game.character.InventoryExchanger;
 import com.cooper.game.interactive.dirt.DirtState;
 
 public class TestDirtInteractive {
 
     private String dirtState1Name = "state 1";
     private String dirtState2Name = "state 2";
+
+    private InventoryExchanger exchanger = InventoryExchanger.getTickInventory();
 
     @Test
     public void testIdentifier() {
@@ -38,10 +41,12 @@ public class TestDirtInteractive {
 
         DirtState dirtState1 = mock(DirtState.class);
         DirtState dirtState2 = mock(DirtState.class);
-        when(dirtState1.performCommandForNewState(any(InteractiveBlockDTO.class)))
+        when(dirtState1.performCommandForNewState(
+                any(InteractiveBlockDTO.class), any(InventoryExchanger.class)))
                 .thenReturn(dirtState2);
         when(dirtState1.getIdentifier()).thenReturn(dirtState1Name);
-        when(dirtState2.performCommandForNewState(any(InteractiveBlockDTO.class)))
+        when(dirtState2.performCommandForNewState(
+                any(InteractiveBlockDTO.class), any(InventoryExchanger.class)))
                 .thenReturn(dirtState1);
         when(dirtState2.getIdentifier()).thenReturn(dirtState2Name);
 
@@ -53,7 +58,8 @@ public class TestDirtInteractive {
 
         Interactive dirtBlock = new DirtInteractive(getMockDirtState());
 
-        InteractiveBlockDTO blockDto = dirtBlock.performCommand(new InteractiveBlockDTO());
+        InteractiveBlockDTO blockDto = dirtBlock.performCommand(
+                new InteractiveBlockDTO(), exchanger);
         assertFalse(blockDto.isSuccessful());
     }
 
@@ -62,7 +68,8 @@ public class TestDirtInteractive {
 
         Interactive dirtBlock = new DirtInteractive(getMockDirtState());
 
-        InteractiveBlockDTO blockDto = dirtBlock.performCommand(new InteractiveBlockDTO("TICK"));
+        InteractiveBlockDTO blockDto = dirtBlock.performCommand(
+                new InteractiveBlockDTO("TICK"), exchanger);
         assertFalse(blockDto.isSuccessful());
     }
 
@@ -71,14 +78,16 @@ public class TestDirtInteractive {
 
         Interactive dirtBlock = new DirtInteractive(getErroredDirtState());
 
-        InteractiveBlockDTO blockDto = dirtBlock.performCommand(new InteractiveBlockDTO("REAL_COMMAND"));
+        InteractiveBlockDTO blockDto = dirtBlock.performCommand(
+                new InteractiveBlockDTO("REAL_COMMAND"), exchanger);
         assertEquals(LocalErrorType.COMMAND_DOES_NOT_EXIST, blockDto.getErrors().get(0));
     }
 
     private DirtState getErroredDirtState() {
 
         DirtState dirtState = mock(DirtState.class);
-        when(dirtState.performCommandForNewState(any(InteractiveBlockDTO.class)))
+        when(dirtState.performCommandForNewState(
+                any(InteractiveBlockDTO.class), any(InventoryExchanger.class)))
                 .thenThrow(new LocalError("", LocalErrorType.COMMAND_DOES_NOT_EXIST));
         return dirtState;
     }
